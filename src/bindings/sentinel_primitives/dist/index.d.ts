@@ -991,7 +991,6 @@ export declare const ClaimsError: {
         message: string;
     };
 };
-export type CountryCode = string;
 /**
  * Represents the type of identity holder
  */
@@ -1050,6 +1049,7 @@ export type CountryRelation = {
     tag: "Organization";
     values: readonly [OrganizationCountryRelation];
 };
+export type CountryCode = number;
 /**
  * A country data containing the country relationship and optional metadata
  */

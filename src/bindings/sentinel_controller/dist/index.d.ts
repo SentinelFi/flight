@@ -5,19 +5,99 @@ export * from '@stellar/stellar-sdk';
 export * as contract from '@stellar/stellar-sdk/contract';
 export * as rpc from '@stellar/stellar-sdk/rpc';
 /**
- * Storage keys for registry
+ * Storage keys for controller
  */
-export type RegistryStorageKey = {
-    tag: "Insurances";
+export type ControllerStorageKey = {
+    tag: "Pools";
     values: void;
 } | {
-    tag: "ByVertical";
+    tag: "OracleAddress";
     values: void;
 } | {
-    tag: "ByStatus";
+    tag: "Status";
     values: void;
 } | {
-    tag: "TotalCount";
+    tag: "Policies";
+    values: void;
+} | {
+    tag: "Underwrites";
+    values: void;
+};
+/**
+ * Storage keys for bonus
+ */
+export type BonusStorageKey = {
+    tag: "BonusConfig";
+    values: void;
+} | {
+    tag: "BonusClaims";
+    values: void;
+};
+/**
+ * Storage keys for dispute
+ */
+export type DisputeStorageKey = {
+    tag: "DisputeConfig";
+    values: void;
+} | {
+    tag: "ActiveDispute";
+    values: void;
+} | {
+    tag: "Disputed";
+    values: void;
+};
+/**
+ * Storage keys for event
+ */
+export type EventStorageKey = {
+    tag: "EventInfo";
+    values: void;
+} | {
+    tag: "Resolved";
+    values: void;
+} | {
+    tag: "Triggered";
+    values: void;
+};
+/**
+ * Storage keys for fees
+ */
+export type FeesStorageKey = {
+    tag: "FeesConfig";
+    values: void;
+};
+/**
+ * Storage keys for guardrails
+ */
+export type GuardrailsStorageKey = {
+    tag: "Limits";
+    values: void;
+} | {
+    tag: "PremiumCount";
+    values: void;
+} | {
+    tag: "UnderwriteCount";
+    values: void;
+};
+/**
+ * Storage keys for metadata
+ */
+export type MetadataStorageKey = {
+    tag: "Metadata";
+    values: void;
+};
+/**
+ * Storage keys for premiums
+ */
+export type PremiumsStorageKey = {
+    tag: "PolicyCounter";
+    values: void;
+};
+/**
+ * Storage keys for strategy
+ */
+export type StrategyStorageKey = {
+    tag: "StrategyConfig";
     values: void;
 };
 export type BonusDistribution = {
@@ -253,6 +333,96 @@ export type RiskTranche = {
 } | {
     tag: "Senior";
     values: void;
+};
+/**
+ * Storage key for enumeration of accounts per role.
+ */
+export interface RoleAccountKey {
+    index: u32;
+    role: string;
+}
+/**
+ * Storage keys for the data associated with the access control
+ */
+export type AccessControlStorageKey = {
+    tag: "RoleAccounts";
+    values: readonly [RoleAccountKey];
+} | {
+    tag: "HasRole";
+    values: readonly [string, string];
+} | {
+    tag: "RoleAccountsCount";
+    values: readonly [string];
+} | {
+    tag: "RoleAdmin";
+    values: readonly [string];
+} | {
+    tag: "Admin";
+    values: void;
+} | {
+    tag: "PendingAdmin";
+    values: void;
+};
+export declare const AccessControlError: {
+    1210: {
+        message: string;
+    };
+    1211: {
+        message: string;
+    };
+    1212: {
+        message: string;
+    };
+    1213: {
+        message: string;
+    };
+    1214: {
+        message: string;
+    };
+    1215: {
+        message: string;
+    };
+    1216: {
+        message: string;
+    };
+    1217: {
+        message: string;
+    };
+    1218: {
+        message: string;
+    };
+};
+/**
+ * Storage keys for `Ownable` utility.
+ */
+export type OwnableStorageKey = {
+    tag: "Owner";
+    values: void;
+} | {
+    tag: "PendingOwner";
+    values: void;
+};
+export declare const OwnableError: {
+    1220: {
+        message: string;
+    };
+    1221: {
+        message: string;
+    };
+    1222: {
+        message: string;
+    };
+};
+export declare const RoleTransferError: {
+    1200: {
+        message: string;
+    };
+    1201: {
+        message: string;
+    };
+    1202: {
+        message: string;
+    };
 };
 export declare const CryptoError: {
     /**
@@ -1283,11 +1453,462 @@ export declare const RWAError: {
 };
 export interface Client {
     /**
-     * Construct and simulate a register transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     * Construct and simulate a buy_premium transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
      */
-    register: ({ insurance, record }: {
-        insurance: string;
-        record: InsuranceRecord;
+    buy_premium: ({ buyer, amount }: {
+        buyer: string;
+        amount: i128;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<i128>>;
+    /**
+     * Construct and simulate a underwrite transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    underwrite: ({ underwriter, amount, risk_layer, tranche }: {
+        underwriter: string;
+        amount: i128;
+        risk_layer: u32;
+        tranche: Option<u32>;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<i128>>;
+    /**
+     * Construct and simulate a resolve transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    resolve: (options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<boolean>>;
+    /**
+     * Construct and simulate a claim_premium_rewards transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    claim_premium_rewards: ({ policy_id, claimer }: {
+        policy_id: u32;
+        claimer: string;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<i128>>;
+    /**
+     * Construct and simulate a claim_underwrite_rewards transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    claim_underwrite_rewards: ({ underwriter }: {
+        underwriter: string;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<i128>>;
+    /**
+     * Construct and simulate a get_status transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    get_status: (options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<PoolStatus>>;
+    /**
+     * Construct and simulate a get_policy transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    get_policy: ({ policy_id }: {
+        policy_id: u32;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<PolicyInfo>>;
+    /**
+     * Construct and simulate a get_policies_owned_by transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    get_policies_owned_by: ({ buyer }: {
+        buyer: string;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<Array<PolicyInfo>>>;
+    /**
+     * Construct and simulate a pause transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    pause: (options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<null>>;
+    /**
+     * Construct and simulate a unpause transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    unpause: (options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<null>>;
+    /**
+     * Construct and simulate a update_oracle transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    update_oracle: ({ new_oracle }: {
+        new_oracle: string;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<null>>;
+    /**
+     * Construct and simulate a get_pools transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    get_pools: (options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<PoolAddresses>>;
+    /**
+     * Construct and simulate a get_total_premiums transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    get_total_premiums: (options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<i128>>;
+    /**
+     * Construct and simulate a get_total_coverage transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    get_total_coverage: (options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<i128>>;
+    /**
+     * Construct and simulate a get_underwrites transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    get_underwrites: (options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<Array<UnderwriterInfo>>>;
+    /**
+     * Construct and simulate a is_resolved transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    is_resolved: (options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<boolean>>;
+    /**
+     * Construct and simulate a is_triggered transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    is_triggered: (options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<boolean>>;
+    /**
+     * Construct and simulate a transfer transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    transfer: ({ from, to, token_id }: {
+        from: string;
+        to: string;
+        token_id: u32;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<null>>;
+    /**
+     * Construct and simulate a transfer_from transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    transfer_from: ({ spender, from, to, token_id }: {
+        spender: string;
+        from: string;
+        to: string;
+        token_id: u32;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<null>>;
+    /**
+     * Construct and simulate a balance transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    balance: ({ account }: {
+        account: string;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<u32>>;
+    /**
+     * Construct and simulate a owner_of transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    owner_of: ({ token_id }: {
+        token_id: u32;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<string>>;
+    /**
+     * Construct and simulate a approve transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    approve: ({ approver, approved, token_id, live_until_ledger }: {
+        approver: string;
+        approved: string;
+        token_id: u32;
+        live_until_ledger: u32;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<null>>;
+    /**
+     * Construct and simulate a approve_for_all transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    approve_for_all: ({ owner, operator, live_until_ledger }: {
+        owner: string;
+        operator: string;
+        live_until_ledger: u32;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<null>>;
+    /**
+     * Construct and simulate a get_approved transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    get_approved: ({ token_id }: {
+        token_id: u32;
+    }, options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<Option<string>>>;
+    /**
+     * Construct and simulate a is_approved_for_all transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    is_approved_for_all: ({ owner, operator }: {
+        owner: string;
+        operator: string;
     }, options?: {
         /**
          * The fee to pay for the transaction. Default: BASE_FEE
@@ -1303,11 +1924,10 @@ export interface Client {
         simulate?: boolean;
     }) => Promise<AssembledTransaction<boolean>>;
     /**
-     * Construct and simulate a update_status transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     * Construct and simulate a token_uri transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
      */
-    update_status: ({ insurance, new_status }: {
-        insurance: string;
-        new_status: PoolStatus;
+    token_uri: ({ token_id }: {
+        token_id: u32;
     }, options?: {
         /**
          * The fee to pay for the transaction. Default: BASE_FEE
@@ -1321,11 +1941,11 @@ export interface Client {
          * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
          */
         simulate?: boolean;
-    }) => Promise<AssembledTransaction<boolean>>;
+    }) => Promise<AssembledTransaction<string>>;
     /**
-     * Construct and simulate a get_all transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     * Construct and simulate a name transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
      */
-    get_all: (options?: {
+    name: (options?: {
         /**
          * The fee to pay for the transaction. Default: BASE_FEE
          */
@@ -1338,12 +1958,47 @@ export interface Client {
          * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
          */
         simulate?: boolean;
-    }) => Promise<AssembledTransaction<Array<InsuranceRecord>>>;
+    }) => Promise<AssembledTransaction<string>>;
     /**
-     * Construct and simulate a get_by_vertical transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     * Construct and simulate a symbol transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
      */
-    get_by_vertical: ({ vertical }: {
-        vertical: Vertical;
+    symbol: (options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<string>>;
+    /**
+     * Construct and simulate a get_owner transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    get_owner: (options?: {
+        /**
+         * The fee to pay for the transaction. Default: BASE_FEE
+         */
+        fee?: number;
+        /**
+         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
+         */
+        timeoutInSeconds?: number;
+        /**
+         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
+         */
+        simulate?: boolean;
+    }) => Promise<AssembledTransaction<Option<string>>>;
+    /**
+     * Construct and simulate a transfer_ownership transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     */
+    transfer_ownership: ({ new_owner, live_until_ledger }: {
+        new_owner: string;
+        live_until_ledger: u32;
     }, options?: {
         /**
          * The fee to pay for the transaction. Default: BASE_FEE
@@ -1357,13 +2012,11 @@ export interface Client {
          * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
          */
         simulate?: boolean;
-    }) => Promise<AssembledTransaction<Array<string>>>;
+    }) => Promise<AssembledTransaction<null>>;
     /**
-     * Construct and simulate a get_by_status transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     * Construct and simulate a accept_ownership transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
      */
-    get_by_status: ({ status }: {
-        status: PoolStatus;
-    }, options?: {
+    accept_ownership: (options?: {
         /**
          * The fee to pay for the transaction. Default: BASE_FEE
          */
@@ -1376,13 +2029,11 @@ export interface Client {
          * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
          */
         simulate?: boolean;
-    }) => Promise<AssembledTransaction<Array<string>>>;
+    }) => Promise<AssembledTransaction<null>>;
     /**
-     * Construct and simulate a get_insurance transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
+     * Construct and simulate a renounce_ownership transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
      */
-    get_insurance: ({ insurance }: {
-        insurance: string;
-    }, options?: {
+    renounce_ownership: (options?: {
         /**
          * The fee to pay for the transaction. Default: BASE_FEE
          */
@@ -1395,68 +2046,18 @@ export interface Client {
          * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
          */
         simulate?: boolean;
-    }) => Promise<AssembledTransaction<Option<InsuranceRecord>>>;
-    /**
-     * Construct and simulate a get_active_count transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
-     */
-    get_active_count: (options?: {
-        /**
-         * The fee to pay for the transaction. Default: BASE_FEE
-         */
-        fee?: number;
-        /**
-         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
-         */
-        timeoutInSeconds?: number;
-        /**
-         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
-         */
-        simulate?: boolean;
-    }) => Promise<AssembledTransaction<u32>>;
-    /**
-     * Construct and simulate a get_total_count transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
-     */
-    get_total_count: (options?: {
-        /**
-         * The fee to pay for the transaction. Default: BASE_FEE
-         */
-        fee?: number;
-        /**
-         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
-         */
-        timeoutInSeconds?: number;
-        /**
-         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
-         */
-        simulate?: boolean;
-    }) => Promise<AssembledTransaction<u32>>;
-    /**
-     * Construct and simulate a search transaction. Returns an `AssembledTransaction` object which will have a `result` field containing the result of the simulation. If this transaction changes contract state, you will need to call `signAndSend()` on the returned object.
-     */
-    search: ({ vertical, status, asset, after_timestamp, before_timestamp }: {
-        vertical: Option<Vertical>;
-        status: Option<PoolStatus>;
-        asset: Option<string>;
-        after_timestamp: Option<u64>;
-        before_timestamp: Option<u64>;
-    }, options?: {
-        /**
-         * The fee to pay for the transaction. Default: BASE_FEE
-         */
-        fee?: number;
-        /**
-         * The maximum amount of time to wait for the transaction to complete. Default: DEFAULT_TIMEOUT
-         */
-        timeoutInSeconds?: number;
-        /**
-         * Whether to automatically simulate the transaction when constructing the AssembledTransaction. Default: true
-         */
-        simulate?: boolean;
-    }) => Promise<AssembledTransaction<Array<InsuranceRecord>>>;
+    }) => Promise<AssembledTransaction<null>>;
 }
 export declare class Client extends ContractClient {
     readonly options: ContractClientOptions;
     static deploy<T = Client>(
+    /** Constructor/Initialization Args for the contract's `__constructor` method */
+    { deployer, pools, oracle, config }: {
+        deployer: string;
+        pools: PoolAddresses;
+        oracle: string;
+        config: DeploymentConfig;
+    }, 
     /** Options for initializing a Client as well as for calling a method, with extras specific to deploying. */
     options: MethodOptions & Omit<ContractClientOptions, "contractId"> & {
         /** The hash of the Wasm blob, which must already be installed on-chain. */
@@ -1468,14 +2069,37 @@ export declare class Client extends ContractClient {
     }): Promise<AssembledTransaction<T>>;
     constructor(options: ContractClientOptions);
     readonly fromJSON: {
-        register: (json: string) => AssembledTransaction<boolean>;
-        update_status: (json: string) => AssembledTransaction<boolean>;
-        get_all: (json: string) => AssembledTransaction<InsuranceRecord[]>;
-        get_by_vertical: (json: string) => AssembledTransaction<string[]>;
-        get_by_status: (json: string) => AssembledTransaction<string[]>;
-        get_insurance: (json: string) => AssembledTransaction<Option<InsuranceRecord>>;
-        get_active_count: (json: string) => AssembledTransaction<number>;
-        get_total_count: (json: string) => AssembledTransaction<number>;
-        search: (json: string) => AssembledTransaction<InsuranceRecord[]>;
+        buy_premium: (json: string) => AssembledTransaction<bigint>;
+        underwrite: (json: string) => AssembledTransaction<bigint>;
+        resolve: (json: string) => AssembledTransaction<boolean>;
+        claim_premium_rewards: (json: string) => AssembledTransaction<bigint>;
+        claim_underwrite_rewards: (json: string) => AssembledTransaction<bigint>;
+        get_status: (json: string) => AssembledTransaction<PoolStatus>;
+        get_policy: (json: string) => AssembledTransaction<PolicyInfo>;
+        get_policies_owned_by: (json: string) => AssembledTransaction<PolicyInfo[]>;
+        pause: (json: string) => AssembledTransaction<null>;
+        unpause: (json: string) => AssembledTransaction<null>;
+        update_oracle: (json: string) => AssembledTransaction<null>;
+        get_pools: (json: string) => AssembledTransaction<PoolAddresses>;
+        get_total_premiums: (json: string) => AssembledTransaction<bigint>;
+        get_total_coverage: (json: string) => AssembledTransaction<bigint>;
+        get_underwrites: (json: string) => AssembledTransaction<UnderwriterInfo[]>;
+        is_resolved: (json: string) => AssembledTransaction<boolean>;
+        is_triggered: (json: string) => AssembledTransaction<boolean>;
+        transfer: (json: string) => AssembledTransaction<null>;
+        transfer_from: (json: string) => AssembledTransaction<null>;
+        balance: (json: string) => AssembledTransaction<number>;
+        owner_of: (json: string) => AssembledTransaction<string>;
+        approve: (json: string) => AssembledTransaction<null>;
+        approve_for_all: (json: string) => AssembledTransaction<null>;
+        get_approved: (json: string) => AssembledTransaction<Option<string>>;
+        is_approved_for_all: (json: string) => AssembledTransaction<boolean>;
+        token_uri: (json: string) => AssembledTransaction<string>;
+        name: (json: string) => AssembledTransaction<string>;
+        symbol: (json: string) => AssembledTransaction<string>;
+        get_owner: (json: string) => AssembledTransaction<Option<string>>;
+        transfer_ownership: (json: string) => AssembledTransaction<null>;
+        accept_ownership: (json: string) => AssembledTransaction<null>;
+        renounce_ownership: (json: string) => AssembledTransaction<null>;
     };
 }

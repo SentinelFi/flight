@@ -807,7 +807,7 @@ export const ClaimsError = {
 
 
 
-
+export type CountryCode = number;
 /**
  * Represents the type of identity holder
  */
@@ -816,9 +816,6 @@ export type IdentityType = {tag: "Individual", values: void} | {tag: "Organizati
 /**
  * Represents different types of country relationships for individuals
  */
-// ISO 3166-1 alpha-2 country code
-export type CountryCode = string;
-
 export type IndividualCountryRelation = {tag: "Residence", values: readonly [CountryCode]} | {tag: "Citizenship", values: readonly [CountryCode]} | {tag: "SourceOfFunds", values: readonly [CountryCode]} | {tag: "TaxResidency", values: readonly [CountryCode]} | {tag: "Custom", values: readonly [string, CountryCode]};
 
 /**
