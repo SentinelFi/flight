@@ -5,7 +5,7 @@ import { Vertical } from 'sentinel_primitives';
 const CONTRACT_CONFIG = {
   networkPassphrase: Client.Networks.TESTNET,
   rpcUrl: "https://soroban-testnet.stellar.org",
-  contractId: "CAQB2RXWYU4DRZTNJC6CR66LECDZTZTDALLSOAGOTUA3HGXJF4OV2JEO",
+  contractId: "CBRR2NAH4OLHTTZMJFJXF3VHG6DSAEXTRJBGRZVSDQOWBODBKBGUQY37",
 } as const;
 
 // Default options for all calls
@@ -17,7 +17,7 @@ const DEFAULT_OPTIONS = {
 // Singleton instance
 let registryClientInstance: Client.Client | null = null;
 
-// Get or create the registry client instance
+// Get or create the client instance
 export function getRegistryClient(): Client.Client {
   if (!registryClientInstance) {
     registryClientInstance = new Client.Client(CONTRACT_CONFIG);

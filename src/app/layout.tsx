@@ -5,6 +5,7 @@ import {
   StellarWalletProvider,
   WalletNetwork,
 } from "@/contexts/StellarWalletContext";
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 const inter = Inter();
 
@@ -26,7 +27,7 @@ export default function RootLayout({
           network={WalletNetwork.PUBLIC}
           autoConnect={true}
         >
-          {children}
+          <LayoutWrapper>{children}</LayoutWrapper>
         </StellarWalletProvider>
       </body>
     </html>
