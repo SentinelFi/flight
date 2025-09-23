@@ -1,18 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import WalletConnectButton from "@/components/WalletConnectButton";
 import NetworkSwitcher from "@/components/NetworkSwitcher";
 import { useStellarWallet } from "@/contexts/StellarWalletContext";
 import { useWalletBalance } from "@/hooks/useWalletBalance";
+import { getByVertical } from "@/lib/contracts/registry";
 
 export default function Home() {
   const [buttonText, setButtonText] = useState("Get Instant Quote");
   const [isHovering, setIsHovering] = useState(false);
   const { isConnected, address, walletId } = useStellarWallet();
   const { balance, isLoading } = useWalletBalance();
+
+  useEffect(() => {
+    async function fetchEntries() {
+      try {
+        // setLoading(true);
+        const data = await getByVertical();
+        console.log("all:", data);
+        // setError(null);
+      } catch (err) {
+        // setError(err instanceof Error ? err.message : 'Failed to fetch entries');
+        console.error("Error fetching registry entries:", err);
+      } finally {
+        // setLoading(false);
+      }
+    }
+    fetchEntries();
+  }, []);
 
   const handleQuote = () => {
     setButtonText("Calculating...");
