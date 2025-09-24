@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import WalletConnectButton from "@/components/WalletConnectButton";
+import { Badge } from "./ui/badge";
 
 interface LayoutWrapperProps {
   children: ReactNode;
@@ -27,6 +28,9 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
               />
             </div>
             <span className="brand-name">Sentinel.</span>
+            <Badge variant="outline" className="text-xs border-gray-500">
+              Testnet
+            </Badge>
           </div>
         </Link>
 

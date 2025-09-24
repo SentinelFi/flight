@@ -30,6 +30,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useStellarWallet } from "@/contexts/StellarWalletContext";
 import WalletNotConnected from "@/components/WalletNotConnected";
+import TestnetAlert from "@/components/TestnetAlert";
 
 const dummyPolicies = [
   {
@@ -148,6 +149,8 @@ export default function PoliciesPage() {
             </div>
           </div>
         </div>
+
+        <TestnetAlert />
 
         {/* Learn More Section */}
         <Card className="border-none bg-white rounded-xl">

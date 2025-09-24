@@ -6,6 +6,7 @@ import ReviewDetailsStep from "@/components/ReviewDetailsStep";
 import EnterAmountStep from "@/components/EnterAmountStep";
 import ConfirmStep from "@/components/ConfirmStep";
 import PurchaseSuccessDialog from "@/components/PurchaseSuccessDialog";
+import TestnetAlert from "./TestnetAlert";
 
 export interface FlightData {
   id: string;
@@ -113,6 +114,8 @@ export default function FlightInsurancePurchase() {
             Protect your travel plans with decentralized flight delay insurance
           </p>
         </div>
+
+        <TestnetAlert />
 
         <Card className="p-8 shadow-lg border-none rounded-xl">
           <StepIndicator steps={steps} currentStep={currentStep} />
