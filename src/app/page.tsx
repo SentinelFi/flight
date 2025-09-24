@@ -1,20 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import WalletConnectButton from "@/components/WalletConnectButton";
 import NetworkSwitcher from "@/components/NetworkSwitcher";
 import { useStellarWallet } from "@/contexts/StellarWalletContext";
 import { useWalletBalance } from "@/hooks/useWalletBalance";
 import { getByVertical } from "@/lib/contracts/registry";
 import { getPoliciesOwnedBy } from "@/lib/contracts/controller";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const [buttonText, setButtonText] = useState("Get Instant Quote");
   const [isHovering, setIsHovering] = useState(false);
   const { isConnected, address, walletId } = useStellarWallet();
   const { balance, isLoading } = useWalletBalance();
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchEntries() {
@@ -51,14 +49,8 @@ export default function Home() {
     fetchPolicies();
   }, [address]);
 
-  const handleQuote = () => {
-    setButtonText("Calculating...");
-    setTimeout(() => {
-      setButtonText("Quote Ready!");
-      setTimeout(() => {
-        setButtonText("Get Instant Quote");
-      }, 2000);
-    }, 1500);
+  const getCovered = () => {
+    router.push("/insure");
   };
 
   return (
@@ -117,12 +109,12 @@ export default function Home() {
             </div>
 
             <div className="input-group">
-              <label htmlFor="coverage">Coverage Amount</label>
-              <input type="text" id="coverage" placeholder="$500 - $5,000" />
+              <label htmlFor="coverage">Premium Amount</label>
+              <input type="text" id="coverage" placeholder="e.g. $500" />
             </div>
 
-            <button className="cta-button" onClick={handleQuote}>
-              {buttonText}
+            <button className="cta-button" onClick={getCovered}>
+              Get Covered
             </button>
 
             <div className="stats">
