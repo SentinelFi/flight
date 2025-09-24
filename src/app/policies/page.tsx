@@ -28,6 +28,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useStellarWallet } from "@/contexts/StellarWalletContext";
+import WalletNotConnected from "@/components/WalletNotConnected";
 
 const dummyPolicies = [
   {
@@ -40,26 +42,26 @@ const dummyPolicies = [
     tokenAmount: 500,
     tokenAsset: "USDC",
   },
-  {
-    id: "POL-20-002",
-    flightNumber: "UA5678",
-    description: "San Francisco to Chicago - Economy",
-    flightDateTime: "2025-01-20T09:15:00Z",
-    status: "Expired",
-    isClaimed: true,
-    tokenAmount: 250,
-    tokenAsset: "USDC",
-  },
-  {
-    id: "POL-20-003",
-    flightNumber: "DL9012",
-    description: "Miami to Seattle - Premium Economy",
-    flightDateTime: "2025-06-25T16:45:00Z",
-    status: "Pending",
-    isClaimed: false,
-    tokenAmount: 350,
-    tokenAsset: "USDC",
-  },
+  // {
+  //   id: "POL-20-002",
+  //   flightNumber: "UA5678",
+  //   description: "San Francisco to Chicago - Economy",
+  //   flightDateTime: "2025-01-20T09:15:00Z",
+  //   status: "Expired",
+  //   isClaimed: true,
+  //   tokenAmount: 250,
+  //   tokenAsset: "USDC",
+  // },
+  // {
+  //   id: "POL-20-003",
+  //   flightNumber: "DL9012",
+  //   description: "Miami to Seattle - Premium Economy",
+  //   flightDateTime: "2025-06-25T16:45:00Z",
+  //   status: "Pending",
+  //   isClaimed: false,
+  //   tokenAmount: 350,
+  //   tokenAsset: "USDC",
+  // },
 ];
 
 const smartContracts = [
@@ -82,6 +84,7 @@ const smartContracts = [
 
 export default function PoliciesPage() {
   const [learnMoreOpen, setLearnMoreOpen] = useState(false);
+  const { isConnected, address } = useStellarWallet();
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -112,13 +115,15 @@ export default function PoliciesPage() {
     0
   );
 
+  if (!isConnected || !address) return <WalletNotConnected />;
+
   return (
     <div>
       <div className="mx-auto px-6 py-8">
         <div className="flex items-center gap-3 mb-2">
           <h1 className="text-4xl font-bold text-balance">Policies</h1>
         </div>
-        <p className="text-xl text-gray-500 text-pretty">
+        <p className="text-md text-gray-600 text-pretty mt-4 leading-relaxed">
           Your decentralized flight insurance policies at a glance.
         </p>
       </div>
@@ -267,7 +272,7 @@ export default function PoliciesPage() {
               {dummyPolicies.map((policy) => (
                 <Card
                   key={policy.id}
-                  className="hover:bg-muted/30 transition-colors border-none bg-white rounded-xl"
+                  className="transition-colors border-none bg-white rounded-xl"
                 >
                   <CardHeader>
                     <div className="flex items-start justify-between">

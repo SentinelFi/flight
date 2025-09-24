@@ -31,10 +31,10 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
         </Link>
 
         <nav>
-          <a href="/">About</a>
-          <a href="#insure">Insure</a>
+          <Link href="/">About</Link>
+          <Link href="/insure">Insure</Link>
           <Link href="/policies">Policies</Link>
-          <a href="#help">Help</a>
+          <Link href="/help">Help</Link>
         </nav>
 
         <WalletConnectButton className="bg-black text-white px-8 py-3 rounded-full hover:cursor-pointer hover:bg-gray-800 transition-colors" />
