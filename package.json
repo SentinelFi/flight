@@ -56,6 +56,9 @@
     "react-hook-form": "^7.63.0",
     "react-resizable-panels": "^3.0.6",
     "recharts": "^3.2.1",
+    "sentinel_controller": "file:./src/bindings/sentinel_controller",
+    "sentinel_primitives": "file:./src/bindings/sentinel_primitives",
+    "sentinel_registry": "file:./src/bindings/sentinel_registry",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7"
