@@ -126,7 +126,17 @@ export default function Home() {
 
   return (
     <main>
-      <div ref={containerRef} className="lottie-container"></div>
+      <div ref={containerRef} className="lottie-container container text-white">
+        <div className="hero-text flex flex-col items-center gap-8 mt-12">
+          <h1 className="font-normal text-[96px] leading-[94px] tracking-[0] text-center max-w-[800px]">
+            Decentralized flight delay insurance
+          </h1>
+          <p className="font-normal text-2xl text-center max-w-[750px]">
+            Smart contract-based parametric insurance with instant payouts.
+            Powered by Stellar blockchain.
+          </p>
+        </div>
+      </div>
 
       {/* <div className="hero-section">
         <div className="hero-text">
