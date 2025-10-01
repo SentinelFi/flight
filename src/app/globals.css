@@ -16,7 +16,7 @@ body {
   width: 100%;
 }
 
-.background-overlay {
+/* .background-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -24,16 +24,16 @@ body {
   bottom: 0;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.4) 100%);
   z-index: -1;
-}
+} */
 
-.airplane-bg {
+.main-bg {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: -2;
-  background-image: url('/planewing.png');
+  background-image: url('/galaxy.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -61,34 +61,36 @@ header {
 }
 
 .brand-name {
-  font-size: 1.45rem;
-  font-weight: 450;
-  color: #000;
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: white;
   letter-spacing: 0px;
+  line-height: 1;
 }
 
 nav {
-  display: flex;
+  /* display: flex;
   gap: 2.5rem;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
+  box-shadow: -1px -1px 0px rgba(255, 255, 255, 0.28), inset -1px -1px 0px rgba(255, 255, 255, 0.28);
 }
 
 nav a {
-  text-decoration: none;
+  /* text-decoration: none;
   color: #000;
   font-weight: 400;
-  font-size: 1.25rem;
+  font-size: 1.25rem; */
   transition: opacity 0.2s ease;
-  position: relative;
+  /* position: relative; */
 }
 
 nav a:hover {
   opacity: 0.7;
 }
 
-nav a::after {
+/* nav a::after {
   content: '';
   position: absolute;
   bottom: -4px;
@@ -97,11 +99,11 @@ nav a::after {
   height: 2px;
   background: #000;
   transition: width 0.3s ease;
-}
+} */
 
-nav a:hover::after {
+/* nav a:hover::after {
   width: 100%;
-}
+} */
 
 .hero-section {
   padding: 8rem 4rem 4rem;
@@ -274,9 +276,9 @@ nav a:hover::after {
     padding: 1.5rem 2rem;
   }
 
-  nav {
+  /* nav {
     gap: 1.5rem;
-  }
+  } */
 
   .hero-section {
     flex-direction: column;
@@ -300,9 +302,9 @@ nav a:hover::after {
 }
 
 @media (max-width: 640px) {
-  nav {
+  /* nav {
     display: none;
-  }
+  } */
 
   .hero-text h1 {
     font-size: 2.5rem;

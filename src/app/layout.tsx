@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { /*Inter*/ Afacad } from "next/font/google";
 import "./globals.css";
 import {
   StellarWalletProvider,
@@ -7,7 +7,7 @@ import {
 } from "@/contexts/StellarWalletContext";
 import LayoutWrapper from "@/components/LayoutWrapper";
 
-const inter = Inter();
+const fnt = Afacad();
 
 export const metadata: Metadata = {
   title: "Sentinel - Decentralized Flight Delay Insurance",
@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={fnt.className}>
         <StellarWalletProvider
           network={WalletNetwork.PUBLIC}
           autoConnect={true}

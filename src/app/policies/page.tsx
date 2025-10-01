@@ -29,7 +29,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { useStellarWallet } from "@/contexts/StellarWalletContext";
-import WalletNotConnected from "@/components/WalletNotConnected";
+// import WalletNotConnected from "@/components/WalletNotConnected";
 import TestnetAlert from "@/components/TestnetAlert";
 
 const dummyPolicies = [
@@ -85,7 +85,7 @@ const smartContracts = [
 
 export default function PoliciesPage() {
   const [learnMoreOpen, setLearnMoreOpen] = useState(false);
-  const { isConnected, address } = useStellarWallet();
+  // const { isConnected, address } = useStellarWallet();
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -116,7 +116,7 @@ export default function PoliciesPage() {
     0
   );
 
-  if (!isConnected || !address) return <WalletNotConnected />;
+  // if (!isConnected || !address) return <WalletNotConnected />;
 
   return (
     <div>

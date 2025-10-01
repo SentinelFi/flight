@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NetworkSwitcher from "@/components/NetworkSwitcher";
 import { useStellarWallet } from "@/contexts/StellarWalletContext";
 import { useWalletBalance } from "@/hooks/useWalletBalance";
-import { getByVertical } from "@/lib/contracts/registry";
-import { getPoliciesOwnedBy } from "@/lib/contracts/controller";
+// import { getByVertical } from "@/lib/contracts/registry";
+// import { getPoliciesOwnedBy } from "@/lib/contracts/controller";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import lottie from "lottie-web";
 
 export default function Home() {
   const [isHovering, setIsHovering] = useState(false);
@@ -26,13 +27,26 @@ export default function Home() {
   const [showThanks, setShowThanks] = useState(false);
   const [emailError, setEmailError] = useState("");
   const router = useRouter();
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      lottie.loadAnimation({
+        container: containerRef.current,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "/globeanim.json",
+      });
+    }
+  }, []);
 
   useEffect(() => {
     async function fetchEntries() {
       try {
         // setLoading(true);
-        const data = await getByVertical();
-        console.log("all:", data);
+        // const data = await getByVertical();
+        // console.log("all:", data);
         // setError(null);
       } catch (err) {
         // setError(err instanceof Error ? err.message : 'Failed to fetch entries');
@@ -49,8 +63,8 @@ export default function Home() {
       try {
         // setLoading(true);
         if (!address) return;
-        const data = await getPoliciesOwnedBy(address);
-        console.log("policies:", data);
+        // const data = await getPoliciesOwnedBy(address);
+        // console.log("policies:", data);
         // setError(null);
       } catch (err) {
         // setError(err instanceof Error ? err.message : 'Failed to fetch entries');
@@ -112,7 +126,9 @@ export default function Home() {
 
   return (
     <main>
-      <div className="hero-section">
+      <div ref={containerRef} className="lottie-container"></div>
+
+      {/* <div className="hero-section">
         <div className="hero-text">
           <h1>
             <span>Decentralized flight</span>
@@ -215,9 +231,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <Dialog open={showThanks} onOpenChange={setShowThanks}>
+      {/* <Dialog open={showThanks} onOpenChange={setShowThanks}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="text-center">Thank You!</DialogTitle>
@@ -236,7 +252,7 @@ export default function Home() {
             </Button>
           </div>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </main>
   );
 }

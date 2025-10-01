@@ -32,7 +32,7 @@ export default function WalletConnectButton({
         className="wallet-button"
       >
         {isConnecting
-          ? "Connecting..."
+          ? "..."
           : isConnected && address
           ? formatAddress(address)
           : "Connect"}
