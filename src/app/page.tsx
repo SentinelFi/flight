@@ -35,6 +35,8 @@ export default function Home() {
     setIsNetworkDropdownOpen(false);
   };
 
+  const handleSubscribe = () => {};
+
   const router = useRouter();
   const containerRef = useRef(null);
 
@@ -276,6 +278,36 @@ export default function Home() {
               <div className="font-bold text-[48px] leading-none">0%</div>
               <div className="font-medium text-[20px] leading-none mt-2">
                 Hassle
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-40 flex flex-col items-center space-y-4">
+            <p className="font-semibold text-[96px] leading-[94px] text-center">
+              Join Our Newsletter
+            </p>
+            <p className="text-[24px] text-center max-w-[750px]">
+              Smart contract-based parametric insurance with instant payouts.
+              Powered by Stellar blockchain.
+            </p>
+            <div className="w-full flex justify-center mt-10">
+              <div className="relative w-full max-w-[409px] bg-[rgba(13,11,24,1)]">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="w-full h-[52px] rounded-[100px] border border-[rgba(255,255,255,0.5)] 
+                     pl-[10px] pr-[140px] py-[10px] bg-transparent text-white 
+                     focus:outline-none focus:ring-2 focus:ring-green-400"
+                />
+
+                <button
+                  onClick={handleSubscribe}
+                  className="absolute right-[5px] top-1/2 -translate-y-1/2 w-[124px] h-[42px] 
+                     rounded-[50px] bg-[rgba(0,255,38,1)] text-black font-bold text-[24px] 
+                     text-center flex items-center justify-center cursor-pointer"
+                >
+                  Subscribe
+                </button>
               </div>
             </div>
           </div>
