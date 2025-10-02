@@ -137,6 +137,78 @@ export default function Home() {
             Smart contract-based parametric insurance with instant payouts.
             Powered by Stellar blockchain.
           </p>
+
+          <div className="glass-box relative mt-32">
+            <div className="bg-[#0F0A28]/5 backdrop-blur-md rounded-[7px] text-left p-8">
+              <p className="font-semibold text-[24px]">Get Coverage Today</p>
+              <p className="font-normal text-[24px]">
+                Protect your journey with automated, blockchain-powered flight
+                insurance.
+              </p>
+
+              <div className="flex justify-between gap-6 mt-6 w-full">
+                <div className="flex flex-col items-start">
+                  <div className="font-bold text-[20px] leading-tight tracking-tight">
+                    Flight Number
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="A1234"
+                    className="mt-6 w-[172px] h-[40px] rounded-[4px] border border-[rgba(255,255,255,0.2)] px-[10px] bg-gradient-to-r from-[#020405] to-[#191022] text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  />
+                </div>
+
+                <div className="flex flex-col items-start">
+                  <div className="font-bold text-[20px] leading-tight tracking-tight">
+                    Travel Date
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="mm/dd/yyyy"
+                    className="mt-6 w-[172px] h-[40px] rounded-[4px] border border-[rgba(255,255,255,0.2)] px-[10px] bg-gradient-to-r from-[#020405] to-[#191022] text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  />
+                </div>
+
+                <div className="flex flex-col items-start">
+                  <div className="font-bold text-[20px] leading-tight tracking-tight">
+                    Premium Amount
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="E.g., 500"
+                    className="mt-6 w-[172px] h-[40px] rounded-[4px] border border-[rgba(255,255,255,0.2)] px-[10px] bg-gradient-to-r from-[#020405] to-[#191022] text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-center mt-12">
+                <button className="bg-[#00FF26] text-[#0C0B17] rounded-[100px] p-[10px] w-[200px] h-[52px] font-bold text-[24px] my-auto hover:cursor-pointer">
+                  Get Covered
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-center items-center gap-[64px] mt-12">
+            <div className="stat w-[130px] h-[110px] rounded-[8px] p-[10px] bg-[rgba(223,184,255,0.2)] flex flex-col items-center justify-center">
+              <div className="font-bold text-[48px] leading-none">24/7</div>
+              <div className="font-medium text-[20px] leading-none mt-2">
+                Coverage
+              </div>
+            </div>
+            <div className="stat w-[130px] h-[110px] rounded-[8px] p-[10px] bg-[rgba(223,184,255,0.2)] flex flex-col items-center justify-center">
+              <div className="font-bold text-[48px] leading-none">100%</div>
+              <div className="font-medium text-[20px] leading-none mt-2">
+                Automated
+              </div>
+            </div>
+            <div className="stat w-[130px] h-[110px] rounded-[8px] p-[10px] bg-[rgba(223,184,255,0.2)] flex flex-col items-center justify-center">
+              <div className="font-bold text-[48px] leading-none">0%</div>
+              <div className="font-medium text-[20px] leading-none mt-2">
+                Hassle
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

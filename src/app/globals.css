@@ -68,6 +68,29 @@ header {
   line-height: 1;
 }
 
+.glass-box::after {
+  content: "";
+  position: absolute;
+  inset: -1;
+  border-radius: 8px;
+  padding: 1px; /* Border thickness */
+  background: linear-gradient(
+    to left,
+    rgba(195, 124, 255, 1),  
+    rgba(12, 11, 23, 0)         
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+.stat {
+  box-shadow: -1px -1px 0px rgba(255, 255, 255, 0.28), inset -1px -1px 0px rgba(255, 255, 255, 0.28);
+}
+
 nav {
   /* display: flex;
   gap: 2.5rem;
