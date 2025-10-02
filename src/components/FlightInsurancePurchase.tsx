@@ -104,23 +104,25 @@ export default function FlightInsurancePurchase() {
   };
 
   return (
-    <div className="min-h-screen py-8 px-4">
+    <div className="min-h-screen py-8 px-4 text-white">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2 text-balance">
-            Get Coverage
+          <h1 className="text-[40px] font-bold mb-2 text-[24px] text-center max-w-[750px]">
+            Get Covered
           </h1>
-          <p className="text-md mt-4 text-muted-foreground text-balance">
+          <p className="mt-4 text-[20px] text-center max-w-[750px]">
             Protect your travel plans with decentralized flight delay insurance
           </p>
         </div>
 
         <TestnetAlert />
 
-        <Card className="p-8 shadow-lg border-none rounded-xl">
-          <StepIndicator steps={steps} currentStep={currentStep} />
-          <div className="mt-8">{renderCurrentStep()}</div>
-        </Card>
+        <div className="relative glass-box mt-4">
+          <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+            <StepIndicator steps={steps} currentStep={currentStep} />
+            <div className="mt-8">{renderCurrentStep()}</div>
+          </div>
+        </div>
       </div>
 
       <PurchaseSuccessDialog

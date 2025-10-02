@@ -36,7 +36,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
             </div>
           </Link>
 
-          <nav className="flex flex-row justify-between items-center rounded-[50px] py-[10px] px-[36px] gap-[36px] bg-white/10 h-[67px] font-normal text-[20px]">
+          <nav className="mr-[10%] flex flex-row justify-between items-center rounded-[50px] py-[10px] px-[36px] gap-[36px] bg-white/10 h-[67px] font-normal text-[20px]">
             <Link href="/">About</Link>
             <Link href="/insure">Insure</Link>
             <Link href="/policies">Policies</Link>

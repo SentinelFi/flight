@@ -1,10 +1,8 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Checkbox } from "@/components/ui/checkbox";
 import type { FlightData } from "./FlightInsurancePurchase";
@@ -103,30 +101,30 @@ export default function ConfirmStep({
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-semibold mb-2">Confirm Purchase</h2>
-        <p className="text-muted-foreground">
+        <p className="text-white">
           Review and agree to the insurance policy terms
         </p>
       </div>
 
-      <Card className="p-6 shadow-lg border-none rounded-xl">
+      <div className="p-6 shadow-lg border-none rounded-xl">
         <h3 className="text-lg font-semibold mb-4">Purchase Summary</h3>
         <div className="space-y-3">
           <div className="flex justify-between">
-            <span className="text-muted-foreground">Flight:</span>
+            <span className="text-gray-300">Flight:</span>
             <span className="font-medium">
               {flight.id} ({flight.from} → {flight.to})
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-muted-foreground">Date:</span>
+            <span className="text-gray-300">Date:</span>
             <span className="font-medium">{flight.date}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-muted-foreground">Premium Amount:</span>
+            <span className="text-gray-300">Premium Amount:</span>
             <span className="font-medium">{amount} USDC</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-muted-foreground">Potential Payout:</span>
+            <span className="text-gray-300">Potential Payout:</span>
             <span className="font-medium text-green-600">
               {(amount * 3).toFixed(2)} USDC
             </span>
@@ -136,9 +134,9 @@ export default function ConfirmStep({
             <span className="font-semibold">{amount} USDC</span>
           </div>
         </div>
-      </Card>
+      </div>
 
-      <Card className="p-6 shadow-lg border-none rounded-xl">
+      <div className="p-6 shadow-lg border-none rounded-xl">
         <h3 className="text-lg font-semibold mb-4">Insurance Policy Terms</h3>
         <ScrollArea
           className="h-64 w-full border rounded-md p-4 border-gray-200"
@@ -158,8 +156,8 @@ export default function ConfirmStep({
           />
           <label
             htmlFor="agree"
-            className={`text-sm ${
-              !hasScrolledToBottom ? "text-muted-foreground" : "text-foreground"
+            className={`text-[16px] ${
+              !hasScrolledToBottom ? "text-white-200" : "text-white"
             }`}
           >
             I have read and agree to the insurance policy terms and conditions
@@ -167,20 +165,24 @@ export default function ConfirmStep({
         </div>
 
         {!hasScrolledToBottom && (
-          <p className="text-xs text-muted-foreground mt-2">
+          <p className="text-[16px] text-white mt-2">
             Please scroll to the bottom of the terms to continue
           </p>
         )}
-      </Card>
+      </div>
 
       <div className="flex justify-between">
-        <Button variant="outline" onClick={onPrevious}>
+        <Button
+          variant="outline"
+          onClick={onPrevious}
+          className="bg-white text-black rounded-[100px] p-[10px] font-bold text-[16px] my-auto hover:cursor-pointer"
+        >
           Previous Step
         </Button>
         <Button
           onClick={onConfirm}
           disabled={!agreed || !hasScrolledToBottom}
-          className="bg-accent hover:bg-accent/90"
+          className="bg-[#00FF26] text-[#0C0B17] rounded-[100px] p-[10px] font-bold text-[16px] my-auto hover:cursor-pointer"
         >
           Agree and Confirm Purchase
         </Button>

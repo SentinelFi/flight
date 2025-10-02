@@ -27,7 +27,7 @@ export default function StepIndicator({
                 step.id < currentStep
                   ? "bg-primary text-primary-foreground border-primary"
                   : step.id === currentStep
-                  ? "bg-accent text-accent-foreground border-accent"
+                  ? "bg-[#ffa7a7] text-black border-none"
                   : "bg-background text-muted-foreground border-border"
               )}
             >
@@ -36,15 +36,13 @@ export default function StepIndicator({
             <div className="mt-2 text-center">
               <div
                 className={cn(
-                  "text-sm font-medium",
-                  step.id <= currentStep
-                    ? "text-foreground"
-                    : "text-muted-foreground"
+                  "text-[16px] font-medium",
+                  step.id <= currentStep ? "text-white" : "text-gray-400"
                 )}
               >
                 {step.title}
               </div>
-              <div className="text-xs text-muted-foreground">
+              <div className="text-[12px] text-muted-foreground">
                 {step.description}
               </div>
             </div>

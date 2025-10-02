@@ -92,7 +92,7 @@ export default function PurchaseSuccessDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md bg-[#7d00ff] text-white">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-center justify-center">
             <CheckCircle className="w-6 h-6 text-green-600" />
@@ -102,19 +102,19 @@ export default function PurchaseSuccessDialog({
 
         <div className="text-center space-y-4">
           <div className="text-4xl">🎉</div>
-          <p className="text-muted-foreground">
+          <p>
             Your flight delay insurance has been successfully purchased and is
             now active.
           </p>
 
           <div className="p-4 bg-muted/50 rounded-lg">
             <p className="text-sm font-medium mb-2">Transaction Details</p>
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Transaction Hash:</span>
+            <div className="flex items-center justify-between text-[16px]">
+              <span>Transaction Hash:</span>
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-auto p-1 text-xs"
+                className="h-auto p-1 text-[16px]"
                 onClick={() => window.open(transactionUrl, "_blank")}
               >
                 {transactionHash.slice(0, 8)}...{transactionHash.slice(-8)}
@@ -123,9 +123,8 @@ export default function PurchaseSuccessDialog({
             </div>
           </div>
 
-          <div className="text-sm text-muted-foreground">
-            You will receive automatic payout if your flight is delayed by 120+
-            minutes.
+          <div className="text-[16px]">
+            You will receive a payout if your flight is delayed by 120+ minutes.
           </div>
         </div>
       </DialogContent>

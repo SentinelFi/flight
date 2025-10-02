@@ -17,10 +17,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CalendarIcon, Plane, Clock, MapPin } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import type { FlightData } from "./FlightInsurancePurchase";
+import { Icon } from "@iconify/react";
 
 // Dummy flight data
 const dummyFlights: FlightData[] = [
@@ -80,7 +80,8 @@ export default function SelectFlightStep({
     "flightId"
   );
   const [flightId, setFlightId] = useState("");
-  const [date, setDate] = useState<Date>();
+  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [calendarOpen, setCalendarOpen] = useState(false);
   const [fromAirport, setFromAirport] = useState("");
   const [toAirport, setToAirport] = useState("");
   const [searchResult, setSearchResult] = useState<FlightData | null>(null);
@@ -127,20 +128,26 @@ export default function SelectFlightStep({
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-semibold mb-2">Search</h2>
-        <p className="text-muted-foreground">
-          Find your flight to get coverage
-        </p>
+        <p className="text-gray-400">Find your flight to get coverage</p>
       </div>
 
       <div className="flex gap-4 mb-6">
         <Button
-          variant={searchMethod === "flightId" ? "default" : "outline"}
+          className={
+            searchMethod === "flightId"
+              ? "bg-[#ffa7a7] text-black rounded-full cursor-pointer hover:text-white"
+              : "bg-black text-white rounded-full cursor-pointer"
+          }
           onClick={() => setSearchMethod("flightId")}
         >
           Flight ID
         </Button>
         <Button
-          variant={searchMethod === "details" ? "default" : "outline"}
+          className={
+            searchMethod === "details"
+              ? "bg-[#ffa7a7] text-black rounded-full cursor-pointer hover:text-white"
+              : "bg-black text-white rounded-full cursor-pointer"
+          }
           onClick={() => setSearchMethod("details")}
         >
           Flight Details
@@ -153,10 +160,10 @@ export default function SelectFlightStep({
             <Label htmlFor="flightId">Flight ID</Label>
             <div className="flex gap-2 mt-1">
               <Select value={flightId} onValueChange={setFlightId}>
-                <SelectTrigger className="flex-1">
+                <SelectTrigger className="flex-1 bg-transparent">
                   <SelectValue placeholder="Select or type flight ID" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-black text-white">
                   {dummyFlights.map((flight) => (
                     <SelectItem key={flight.id} value={flight.id}>
                       {flight.id} - {flight.from} to {flight.to}
@@ -164,7 +171,11 @@ export default function SelectFlightStep({
                   ))}
                 </SelectContent>
               </Select>
-              <Button onClick={handleFlightIdSearch} disabled={!flightId}>
+              <Button
+                onClick={handleFlightIdSearch}
+                disabled={!flightId}
+                className="bg-[#00FF26] text-[#0C0B17] rounded-[100px] p-[10px] font-bold text-[16px] my-auto hover:cursor-pointer hover:text-white"
+              >
                 Load Flight
               </Button>
             </div>
@@ -174,24 +185,25 @@ export default function SelectFlightStep({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <Label>Flight Date</Label>
-            <Popover>
-              <PopoverTrigger asChild>
+            <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
+              <PopoverTrigger asChild className="bg-transparent">
                 <Button
                   variant="outline"
                   className={cn(
-                    "w-full justify-start text-left font-normal mt-1",
-                    !date && "text-muted-foreground"
+                    "w-full justify-start text-left font-normal mt-1"
                   )}
                 >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  <Icon icon="mdi:calendar" width="24" height="24" />
                   {date ? format(date, "PPP") : "Pick a date"}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
                 <Calendar
                   mode="single"
-                  selected={date}
-                  onSelect={setDate}
+                  onSelect={(d) => {
+                    setDate(d);
+                    setCalendarOpen(false);
+                  }}
                   autoFocus
                 />
               </PopoverContent>
@@ -201,7 +213,7 @@ export default function SelectFlightStep({
           <div>
             <Label>From</Label>
             <Select value={fromAirport} onValueChange={setFromAirport}>
-              <SelectTrigger className="mt-1">
+              <SelectTrigger className="mt-1 bg-transparent">
                 <SelectValue placeholder="Departure airport" />
               </SelectTrigger>
               <SelectContent>
@@ -217,7 +229,7 @@ export default function SelectFlightStep({
           <div>
             <Label>To</Label>
             <Select value={toAirport} onValueChange={setToAirport}>
-              <SelectTrigger className="mt-1">
+              <SelectTrigger className="mt-1 bg-transparent">
                 <SelectValue placeholder="Arrival airport" />
               </SelectTrigger>
               <SelectContent>
@@ -234,7 +246,7 @@ export default function SelectFlightStep({
             <Button
               onClick={handleDetailsSearch}
               disabled={!date || !fromAirport || !toAirport}
-              className="w-full"
+              className="bg-[#00FF26] text-[#0C0B17] rounded-[100px] p-[10px] font-bold text-[16px] my-auto hover:cursor-pointer hover:text-white"
             >
               Load Flight
             </Button>
@@ -243,12 +255,10 @@ export default function SelectFlightStep({
       )}
 
       {searchResult && (
-        <Card className="p-4 border-accent">
+        <div className="p-4 border-accent bg-black rounded-md">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="p-2 bg-accent/10 rounded-lg">
-                <Plane className="w-6 h-6 text-accent" />
-              </div>
+              <Icon icon="mdi:airplane" width="24" height="24" />
               <div>
                 <div className="font-semibold text-lg">{searchResult.id}</div>
                 <div className="text-sm text-muted-foreground">
@@ -258,13 +268,13 @@ export default function SelectFlightStep({
             </div>
             <div className="text-right">
               <div className="flex items-center gap-2 text-sm">
-                <MapPin className="w-4 h-4" />
+                <Icon icon="mdi:map" width="24" height="24" />
                 <span>
                   {searchResult.from} → {searchResult.to}
                 </span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Clock className="w-4 h-4" />
+                <Icon icon="mdi:clock" width="24" height="24" />
                 <span>
                   {searchResult.departure} - {searchResult.arrival}
                 </span>
@@ -272,14 +282,17 @@ export default function SelectFlightStep({
             </div>
           </div>
           <div className="mt-4 flex items-center justify-between">
-            <span className="text-sm font-medium text-green-600">
+            <span className="text-[16px] font-medium text-[#00ff26]">
               Available
             </span>
-            <Button onClick={() => handleSelectFlight(searchResult)}>
+            <Button
+              onClick={() => handleSelectFlight(searchResult)}
+              className="bg-[#00FF26] text-[#0C0B17] rounded-[100px] p-[10px] font-bold text-[16px] my-auto hover:cursor-pointer hover:text-white"
+            >
               Select Flight
             </Button>
           </div>
-        </Card>
+        </div>
       )}
 
       {notFound && (
@@ -295,7 +308,12 @@ export default function SelectFlightStep({
 
       {selectedFlight && (
         <div className="flex justify-end">
-          <Button onClick={onNext}>Next Step</Button>
+          <Button
+            onClick={onNext}
+            className="bg-[#00FF26] text-[#0C0B17] rounded-[100px] p-[10px] font-bold text-[16px] my-auto hover:cursor-pointer hover:text-white"
+          >
+            Next Step
+          </Button>
         </div>
       )}
     </div>
