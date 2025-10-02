@@ -126,8 +126,10 @@ export default function Home() {
 
   return (
     <main>
-      <div ref={containerRef} className="lottie-container container text-white">
-        <div className="hero-text flex flex-col items-center gap-8 mt-12">
+      <div className="container text-white relative flex justify-center">
+        <div ref={containerRef} className="w-full h-full mt-44"></div>
+
+        <div className="hero-text absolute top-12 flex flex-col items-center gap-8">
           <h1 className="font-normal text-[96px] leading-[94px] tracking-[0] text-center max-w-[800px]">
             Decentralized flight delay insurance
           </h1>
