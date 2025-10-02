@@ -16,7 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import lottie from "lottie-web";
+import lottie, { AnimationItem } from "lottie-web";
 import { Icon } from "@iconify/react";
 
 export default function Home() {
@@ -38,11 +38,12 @@ export default function Home() {
   const handleSubscribe = () => {};
 
   const router = useRouter();
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const animationRef = useRef<AnimationItem | null>(null);
 
   useEffect(() => {
-    if (containerRef.current) {
-      lottie.loadAnimation({
+    if (containerRef.current && !animationRef.current) {
+      animationRef.current = lottie.loadAnimation({
         container: containerRef.current,
         renderer: "svg",
         loop: true,
@@ -50,6 +51,13 @@ export default function Home() {
         path: "/globeanim.json",
       });
     }
+
+    return () => {
+      if (animationRef.current) {
+        animationRef.current.destroy();
+        animationRef.current = null;
+      }
+    };
   }, []);
 
   useEffect(() => {
