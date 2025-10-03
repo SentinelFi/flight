@@ -16,9 +16,9 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
     <>
       <div className="container mx-auto">
         <div className="main-bg"></div>
-        <div className="background-overlay"></div>
+        {/* <div className="background-overlay"></div> */}
 
-        <header className="mt-8 text-white">
+        <header className="relative mt-8 text-white flex flex-col gap-6 justify-between items-center md:flex-row md:gap-2">
           <Link href="/">
             <div className="logo-section">
               <div className="logo">
@@ -30,13 +30,13 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
                 />
               </div>
               <span className="brand-name">Sentinel.</span>
-              <Badge className="font-normal text-[20px] text-center w-[78px] h-[27px] px-[10px] bg-[#FFA7A7] text-black">
+              <Badge className="font-normal text-[20px] text-center w-[78px] h-[27px] px-[10px] bg-[#FFA7A7] text-black hover:text-white">
                 Testnet
               </Badge>
             </div>
           </Link>
 
-          <nav className="mr-[10%] flex flex-row justify-between items-center rounded-[50px] py-[10px] px-[36px] gap-[36px] bg-white/10 h-[67px] font-normal text-[20px]">
+          <nav className="xl:mr-[10%] flex flex-row justify-between items-center rounded-[50px] py-[10px] px-[36px] gap-[36px] bg-white/10 h-[67px] font-normal text-[20px]">
             <Link href="/">About</Link>
             <Link href="/insure">Insure</Link>
             <Link href="/policies">Policies</Link>

@@ -102,7 +102,7 @@ export default function PoliciesPage() {
   // if (!isConnected || !address) return <WalletNotConnected />;
 
   return (
-    <div className="min-h-screen py-8 px-4 text-white">
+    <div className="min-h-screen py-8 px-4 text-white mb-32">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-[40px] font-bold mb-2 text-center max-w-[750px] mx-auto">

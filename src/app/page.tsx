@@ -142,129 +142,133 @@ export default function Home() {
 
   return (
     <main>
-      <div className="container text-white relative flex justify-center">
-        <div ref={containerRef} className="w-full h-full mt-44"></div>
+      <div className="container text-white relative flex justify-center items-start h-[1800px]">
+        <div ref={containerRef} className="w-full mt-44 self-"></div>
 
         <div className="hero-text absolute top-12 flex flex-col items-center">
-          <h1 className="font-normal text-[96px] leading-[94px] tracking-[0] text-center max-w-[750px]">
+          <h1 className="font-normal text-[48px] max-w-[400px] leading-[40px] sm:text-[72px] sm:max-w-[600px] sm:leading-[60px] md:text-[90px] md:max-w-[750px] md:leading-[94px] lg:text-[96px] xl:text-[96px] tracking-[0] text-center">
             Decentralized flight delay insurance
           </h1>
-          <p className="font-normal text-2xl text-center max-w-[750px] mt-8">
+          <p className="font-normal text-center text-lg max-w-[400px] xl:text-2xl xl:max-w-[750px] mt-8">
             Smart contract-based parametric insurance with instant payouts.
             Powered by Stellar blockchain.
           </p>
 
-          <div className="relative mt-40 self-end">
-            <div className="w-[113px] h-[34px]">
-              <button
-                onClick={() => setIsNetworkDropdownOpen(!isNetworkDropdownOpen)}
-                className="w-full h-full rounded-[4px] px-[10px] py-[5px] flex justify-between items-center
-                   bg-[rgba(125,0,255,1)] border border-[rgba(255,255,255,0.2)] text-white cursor-pointer"
-              >
-                {selectedNetwork}
-                <Icon
-                  icon={
-                    isNetworkDropdownOpen
-                      ? "mdi:chevron-up"
-                      : "mdi:chevron-down"
-                  }
-                  width="24"
-                  height="24"
-                />
-              </button>
-              {isNetworkDropdownOpen && (
-                <div className="absolute top-full left-0 w-full mt-1 bg-[rgba(125,0,255,1)] border border-[rgba(255,255,255,0.2)] rounded-[4px] text-white text-sm z-10">
-                  <div
-                    className="px-3 py-1 cursor-pointer hover:bg-purple-700"
-                    onClick={() => handleSelect("Testnet")}
-                  >
-                    Testnet
-                  </div>
-                  <div
-                    className="px-3 py-1 cursor-pointer hover:bg-purple-700"
-                    onClick={() => handleSelect("Public")}
-                  >
-                    Public
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="relative glass-box mt-4">
-            <div className="bg-[#0F0A28]/5 backdrop-blur-md rounded-[7px] text-left p-8">
-              <p className="font-semibold text-[24px]">Get Coverage Today</p>
-              <p className="font-normal text-[24px]">
-                Protect your journey with automated, blockchain-powered flight
-                insurance.
-              </p>
-
-              <div className="flex justify-between gap-6 mt-6 w-full">
-                <div className="flex flex-col items-start">
-                  <div className="font-bold text-[20px] leading-tight tracking-tight">
-                    Flight Number
-                  </div>
-                  <div className="relative mt-6">
-                    <input
-                      type="text"
-                      placeholder="A1234"
-                      className="w-[172px] h-[40px] rounded-[4px] border border-[rgba(255,255,255,0.2)] px-[10px] bg-gradient-to-r from-[#020405] to-[#191022] text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
-                    />
-                    <Icon
-                      icon="mdi:airplane"
-                      width="24"
-                      height="24"
-                      className="absolute right-2 top-1/2 -translate-y-1/2"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start">
-                  <div className="font-bold text-[20px] leading-tight tracking-tight">
-                    Travel Date
-                  </div>
-                  <div className="relative mt-6">
-                    <input
-                      type="text"
-                      placeholder="mm/dd/yyyy"
-                      className="w-[172px] h-[40px] rounded-[4px] border border-[rgba(255,255,255,0.2)] px-[10px] bg-gradient-to-r from-[#020405] to-[#191022] text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
-                    />
-                    <Icon
-                      icon="mdi:calendar"
-                      width="24"
-                      height="24"
-                      className="absolute right-2 top-1/2 -translate-y-1/2"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start">
-                  <div className="font-bold text-[20px] leading-tight tracking-tight">
-                    Premium Amount
-                  </div>
-                  <div className="relative mt-6">
-                    <input
-                      type="text"
-                      placeholder="E.g., 500"
-                      className="w-[172px] h-[40px] rounded-[4px] border border-[rgba(255,255,255,0.2)] px-[10px] bg-gradient-to-r from-[#020405] to-[#191022] text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
-                    />
-                    <Icon
-                      icon="mdi:currency-usd"
-                      width="24"
-                      height="24"
-                      className="absolute right-2 top-1/2 -translate-y-1/2"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex justify-center mt-12">
+          <div className="flex flex-col">
+            <div className="relative mt-8 md:md-24 xl:mt-40 self-end">
+              <div className="w-[113px] h-[34px]">
                 <button
-                  className="bg-[#00FF26] text-[#0C0B17] rounded-[100px] p-[10px] w-[200px] font-bold text-[24px] my-auto hover:cursor-pointer"
-                  onClick={getCovered}
+                  onClick={() =>
+                    setIsNetworkDropdownOpen(!isNetworkDropdownOpen)
+                  }
+                  className="w-full h-full rounded-[4px] px-[10px] py-[5px] flex justify-between items-center
+                   bg-[rgba(125,0,255,1)] border border-[rgba(255,255,255,0.2)] text-white cursor-pointer"
                 >
-                  Get Covered
+                  {selectedNetwork}
+                  <Icon
+                    icon={
+                      isNetworkDropdownOpen
+                        ? "mdi:chevron-up"
+                        : "mdi:chevron-down"
+                    }
+                    width="24"
+                    height="24"
+                  />
                 </button>
+                {isNetworkDropdownOpen && (
+                  <div className="absolute top-full left-0 w-full mt-1 bg-[rgba(125,0,255,1)] border border-[rgba(255,255,255,0.2)] rounded-[4px] text-white text-sm z-10">
+                    <div
+                      className="px-3 py-1 cursor-pointer hover:bg-purple-700"
+                      onClick={() => handleSelect("Testnet")}
+                    >
+                      Testnet
+                    </div>
+                    <div
+                      className="px-3 py-1 cursor-pointer hover:bg-purple-700"
+                      onClick={() => handleSelect("Public")}
+                    >
+                      Public
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="relative glass-box mt-4">
+              <div className="bg-[#0F0A28]/5 backdrop-blur-md rounded-[7px] text-left p-6 md:p-8">
+                <p className="font-semibold text-[24px]">Get Coverage Today</p>
+                <p className="font-normal text-md max-w-[450px] md:text-[24px] md:max-w-[750px]">
+                  Protect your journey with automated, blockchain-powered flight
+                  insurance.
+                </p>
+
+                <div className="flex flex-col md:flex-row justify-between gap-6 mt-6 w-full items-center">
+                  <div className="flex flex-col items-start">
+                    <div className="font-bold text-[20px] leading-tight tracking-tight">
+                      Flight Number
+                    </div>
+                    <div className="relative mt-6">
+                      <input
+                        type="text"
+                        placeholder="A1234"
+                        className="w-[172px] h-[40px] rounded-[4px] border border-[rgba(255,255,255,0.2)] px-[10px] bg-gradient-to-r from-[#020405] to-[#191022] text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+                      />
+                      <Icon
+                        icon="mdi:airplane"
+                        width="24"
+                        height="24"
+                        className="absolute right-2 top-1/2 -translate-y-1/2"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-start">
+                    <div className="font-bold text-[20px] leading-tight tracking-tight">
+                      Travel Date
+                    </div>
+                    <div className="relative mt-6">
+                      <input
+                        type="text"
+                        placeholder="mm/dd/yyyy"
+                        className="w-[172px] h-[40px] rounded-[4px] border border-[rgba(255,255,255,0.2)] px-[10px] bg-gradient-to-r from-[#020405] to-[#191022] text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+                      />
+                      <Icon
+                        icon="mdi:calendar"
+                        width="24"
+                        height="24"
+                        className="absolute right-2 top-1/2 -translate-y-1/2"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-start">
+                    <div className="font-bold text-[20px] leading-tight tracking-tight">
+                      Premium Amount
+                    </div>
+                    <div className="relative mt-6">
+                      <input
+                        type="text"
+                        placeholder="E.g., 500"
+                        className="w-[172px] h-[40px] rounded-[4px] border border-[rgba(255,255,255,0.2)] px-[10px] bg-gradient-to-r from-[#020405] to-[#191022] text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+                      />
+                      <Icon
+                        icon="mdi:currency-usd"
+                        width="24"
+                        height="24"
+                        className="absolute right-2 top-1/2 -translate-y-1/2"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-center mt-12">
+                  <button
+                    className="bg-[#00FF26] text-[#0C0B17] rounded-[100px] p-[10px] w-[200px] font-bold text-[24px] my-auto hover:cursor-pointer"
+                    onClick={getCovered}
+                  >
+                    Get Covered
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -299,14 +303,14 @@ export default function Home() {
               and stay ahead of what is next.
             </p>
             <div className="w-full flex justify-center mt-10">
-              <div className="relative w-full max-w-[409px] bg-[rgba(13,11,24,1)]">
+              <div className="relative w-full max-w-[409px] bg-[rgba(13,11,24,1)] rounded-[100px]">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={isSubmitting}
                   placeholder="Email"
-                  className="w-full h-[52px] rounded-[100px] border border-[rgba(255,255,255,0.5)] 
+                  className="w-full h-[52px] rounded-[100px] border border-[rgba(255,255,255,0.5)]  
                      pl-[10px] pr-[140px] py-[10px] bg-transparent text-white 
                      focus:outline-none focus:ring-2 focus:ring-green-400"
                 />

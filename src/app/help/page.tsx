@@ -84,7 +84,7 @@ export default function HelpPage() {
   };
 
   return (
-    <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-white">
+    <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-white mb-32">
       {/* Hero Section */}
 
       <div className="max-w-4xl mx-auto">
