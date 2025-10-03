@@ -66,17 +66,29 @@ export default function FooterMain() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="hover:text-white/50">
+                    <Link
+                      href="https://github.com/SentinelFi/"
+                      target="_blank"
+                      className="hover:text-white/50"
+                    >
                       Documentation
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="hover:text-white/50">
+                    <Link
+                      href="https://stellar.org/"
+                      target="_blank"
+                      className="hover:text-white/50"
+                    >
                       Stellar
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="hover:text-white/50">
+                    <Link
+                      href="https://github.com/SentinelFi/"
+                      target="_blank"
+                      className="hover:text-white/50"
+                    >
                       Blog
                     </Link>
                   </li>
@@ -87,12 +99,12 @@ export default function FooterMain() {
                 <p className="font-semibold">Legal</p>
                 <ul className="mt-3 space-y-2">
                   <li>
-                    <Link href="#" className="hover:text-white/50">
+                    <Link href="/terms" className="hover:text-white/50">
                       Terms of Service
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="hover:text-white/50">
+                    <Link href="/policy" className="hover:text-white/50">
                       Privacy Policy
                     </Link>
                   </li>
@@ -143,7 +155,7 @@ export default function FooterMain() {
       />
 
       <div className="mx-auto px-6 py-6 text-center text-[16px]">
-        <p>© {year} Sentinel. All Rights Reserved.</p>
+        <p>© {year} Sentinel. Hedge Risks on Soroban.</p>
         <p className="mt-1">
           Decentralized Flight Delay Insurance — Powered by Stellar Blockchain.
         </p>

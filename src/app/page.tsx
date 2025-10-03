@@ -298,8 +298,8 @@ export default function Home() {
               Join Our Newsletter
             </p>
             <p className="text-[24px] text-center max-w-[750px]">
-              Smart contract-based parametric insurance with instant payouts.
-              Powered by Stellar blockchain.
+              Get the latest updates, insights, and news straight to your inbox
+              and stay ahead of what is next.
             </p>
             <div className="w-full flex justify-center mt-10">
               <div className="relative w-full max-w-[409px] bg-[rgba(13,11,24,1)]">
