@@ -96,6 +96,11 @@ header {
   box-shadow: -1px -1px 0px rgba(255, 255, 255, 0.28), inset -1px -1px 0px rgba(255, 255, 255, 0.28);
 }
 
+.tabs {
+  color: black;
+  background: #00ff26;
+}
+
 nav {
   /* display: flex;
   gap: 2.5rem;

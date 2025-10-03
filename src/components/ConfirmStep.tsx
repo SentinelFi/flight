@@ -125,7 +125,7 @@ export default function ConfirmStep({
           </div>
           <div className="flex justify-between">
             <span className="text-gray-300">Potential Payout:</span>
-            <span className="font-medium text-green-600">
+            <span className="font-medium text-[#00ff26]">
               {(amount * 3).toFixed(2)} USDC
             </span>
           </div>
@@ -153,6 +153,7 @@ export default function ConfirmStep({
             checked={agreed}
             onCheckedChange={(checked) => setAgreed(checked as boolean)}
             disabled={!hasScrolledToBottom}
+            className="bg-white"
           />
           <label
             htmlFor="agree"

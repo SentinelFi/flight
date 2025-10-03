@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
 import StepIndicator from "@/components/StepIndicator";
 import SelectFlightStep from "@/components/SelectFlightStep";
 import ReviewDetailsStep from "@/components/ReviewDetailsStep";
@@ -54,12 +53,12 @@ export default function FlightInsurancePurchase() {
 
   const handlePurchaseComplete = () => {
     setShowSuccessDialog(true);
-    // setTimeout(() => {
-    //   //   setCurrentStep(1);
-    //   setSelectedFlight(null);
-    //   setPremiumAmount(0);
-    //   setShowSuccessDialog(false);
-    // }, 5000);
+    setTimeout(() => {
+      setCurrentStep(1);
+      setSelectedFlight(null);
+      setPremiumAmount(0);
+      // setShowSuccessDialog(false);
+    }, 5000);
   };
 
   const renderCurrentStep = () => {

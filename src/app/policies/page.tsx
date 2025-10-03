@@ -1,13 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -16,21 +9,11 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import {
-  ExternalLink,
-  ChevronDown,
-  ChevronUp,
-  Plane,
-  Clock,
-  DollarSign,
-  FileText,
-  AlertTriangle,
-} from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
-import { useStellarWallet } from "@/contexts/StellarWalletContext";
+// import { useStellarWallet } from "@/contexts/StellarWalletContext";
 // import WalletNotConnected from "@/components/WalletNotConnected";
 import TestnetAlert from "@/components/TestnetAlert";
+import { Icon } from "@iconify/react";
 
 const dummyPolicies = [
   {
@@ -119,153 +102,146 @@ export default function PoliciesPage() {
   // if (!isConnected || !address) return <WalletNotConnected />;
 
   return (
-    <div>
-      <div className="mx-auto px-6 py-8">
-        <div className="flex items-center gap-3 mb-2">
-          <h1 className="text-4xl font-bold text-balance">Policies</h1>
+    <div className="min-h-screen py-8 px-4 text-white">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-[40px] font-bold mb-2 text-[24px] text-center max-w-[750px]">
+            Insurance Policies
+          </h1>
+          <p className="mt-4 text-[20px] text-center max-w-[750px]">
+            Your decentralized flight insurance policies at a glance
+          </p>
         </div>
-        <p className="text-md text-gray-600 text-pretty mt-4 leading-relaxed">
-          Your decentralized flight insurance policies at a glance.
-        </p>
+
+        <TestnetAlert />
       </div>
 
-      <div className="mx-auto px-6 py-8 space-y-8">
-        <div className="relative rounded-xl overflow-hidden bg-gradient-to-r from-primary/20 to-accent/20 animate-fadeIn">
-          <Image
-            src="/flightpolicies.png"
-            alt="Flight insurance banner"
-            width={1536}
-            height={512}
-            className="opacity-100"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-transparent flex items-center">
-            <div className="px-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-                Fly with Confidence
-              </h2>
-              <p className="text-muted-foreground">
-                Stellar blockchain-powered protection for every journey
-              </p>
+      <div className="mx-auto px-6 py-8 space-y-8 max-w-5xl">
+        {/* Learn More Section */}
+        <div className="relative glass-box mt-4">
+          <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+            <Collapsible open={learnMoreOpen} onOpenChange={setLearnMoreOpen}>
+              <CollapsibleTrigger asChild>
+                <div className="cursor-pointer">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <Icon icon="mdi:file-text" width="24" height="24" />
+                        How Premium Policies Work
+                      </div>
+                      <div>
+                        Learn about our decentralized insurance mechanism
+                      </div>
+                    </div>
+                    <Icon
+                      icon={
+                        learnMoreOpen ? "mdi:chevron-up" : "mdi:chevron-down"
+                      }
+                      width="24"
+                      height="24"
+                    />
+                  </div>
+                </div>
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <div className="pt-0">
+                  <div className="space-y-4 text-[16px]">
+                    <p>
+                      Our premium policies use smart contracts on the Stellar
+                      blockchain to provide transparent, automated flight
+                      insurance coverage. Here's how it works:
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <h4 className="font-semibold">1. Purchase Coverage</h4>
+                        <p>
+                          Pay premiums using tokens to secure your flight
+                          against delays and cancellations.
+                        </p>
+                      </div>
+                      <div className="space-y-2">
+                        <h4 className="font-semibold">
+                          2. Automated Monitoring
+                        </h4>
+                        <p>
+                          Our oracle system tracks flight data in real-time for
+                          accurate claim processing.
+                        </p>
+                      </div>
+                      <div className="space-y-2">
+                        <h4 className="font-semibold">3. Instant Payouts</h4>
+                        <p>
+                          Claims are processed automatically when flight
+                          disruptions meet policy conditions.
+                        </p>
+                      </div>
+                      <div className="space-y-2">
+                        <h4 className="font-semibold">
+                          4. Transparent Process
+                        </h4>
+                        <p>
+                          All transactions are recorded on-chain for complete
+                          transparency and trust.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CollapsibleContent>
+            </Collapsible>
+          </div>
+        </div>
+
+        {/* Statistics */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="relative glass-box mt-4">
+            <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+              <div className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <div className="text-[16px] font-medium">Total Policies</div>
+                <Icon icon="mdi:file-text" width="24" height="24" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold">{totalPolicies}</div>
+                <p className="text-[16px] text-gray-400">
+                  Active and historical coverage
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="relative glass-box mt-4">
+            <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+              <div className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <div className="text-[16px] font-medium">
+                  Total Value Insured
+                </div>
+                <Icon icon="mdi:currency-usd" width="24" height="24" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold">
+                  ${totalValueInsured.toLocaleString()} USD
+                </div>
+                <p className="text-[16px] text-muted-foreground">
+                  Cumulative coverage amount
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        <TestnetAlert />
-
-        {/* Learn More Section */}
-        <Card className="border-none bg-white rounded-xl">
-          <Collapsible open={learnMoreOpen} onOpenChange={setLearnMoreOpen}>
-            <CollapsibleTrigger asChild>
-              <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="flex items-center gap-2">
-                      <FileText className="h-5 w-5" />
-                      How Premium Policies Work
-                    </CardTitle>
-                    <CardDescription>
-                      Learn about our decentralized insurance mechanism
-                    </CardDescription>
-                  </div>
-                  {learnMoreOpen ? (
-                    <ChevronUp className="h-5 w-5" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5" />
-                  )}
-                </div>
-              </CardHeader>
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <CardContent className="pt-0">
-                <div className="space-y-4 text-sm text-muted-foreground">
-                  <p>
-                    Our premium policies use smart contracts on the Stellar
-                    blockchain to provide transparent, automated flight
-                    insurance coverage. Here's how it works:
-                  </p>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-foreground">
-                        1. Purchase Coverage
-                      </h4>
-                      <p>
-                        Pay premiums using tokens to secure your flight against
-                        delays and cancellations.
-                      </p>
-                    </div>
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-foreground">
-                        2. Automated Monitoring
-                      </h4>
-                      <p>
-                        Our oracle system tracks flight data in real-time for
-                        accurate claim processing.
-                      </p>
-                    </div>
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-foreground">
-                        3. Instant Payouts
-                      </h4>
-                      <p>
-                        Claims are processed automatically when flight
-                        disruptions meet policy conditions.
-                      </p>
-                    </div>
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-foreground">
-                        4. Transparent Process
-                      </h4>
-                      <p>
-                        All transactions are recorded on-chain for complete
-                        transparency and trust.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </CollapsibleContent>
-          </Collapsible>
-        </Card>
-
-        {/* Statistics */}
-        <div className="grid md:grid-cols-2 gap-6">
-          <Card className="border-none bg-white rounded-xl">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                Total Policies
-              </CardTitle>
-              <FileText className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{totalPolicies}</div>
-              <p className="text-xs text-muted-foreground">
-                Active and historical coverage
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="border-none bg-white rounded-xl">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                Total Value Insured
-              </CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                ${totalValueInsured.toLocaleString()} USD
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Cumulative coverage amount
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-
         {/* Main Content Tabs */}
         <Tabs defaultValue="policies" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2 bg-white/50">
-            <TabsTrigger value="policies">Policies</TabsTrigger>
-            <TabsTrigger value="history" disabled>
+          <TabsList className="grid w-full grid-cols-2 bg-white/5">
+            <TabsTrigger
+              value="policies"
+              className="tabs font-bold text-[16px]"
+            >
+              Policies
+            </TabsTrigger>
+            <TabsTrigger
+              value="history"
+              disabled
+              className="font-bold text-[16px]"
+            >
               History (Coming Soon)
             </TabsTrigger>
           </TabsList>
@@ -273,90 +249,91 @@ export default function PoliciesPage() {
           <TabsContent value="policies" className="space-y-6">
             <div className="grid gap-6">
               {dummyPolicies.map((policy) => (
-                <Card
-                  key={policy.id}
-                  className="transition-colors border-none bg-white rounded-xl"
-                >
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-1">
-                        <CardTitle className="flex items-center gap-2">
-                          <Plane className="h-5 w-5 text-primary" />
-                          {policy.flightNumber}
-                        </CardTitle>
-                        <CardDescription>{policy.description}</CardDescription>
-                      </div>
-                      <Badge className={getStatusColor(policy.status)}>
-                        {policy.status}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-                      <div className="space-y-1">
-                        <p className="text-sm text-muted-foreground">
-                          Policy ID
-                        </p>
-                        <p className="font-mono text-sm">{policy.id}</p>
-                      </div>
-                      <div className="space-y-1">
-                        <p className="text-sm text-muted-foreground">
-                          Flight Date
-                        </p>
-                        <p className="text-sm flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          {formatDate(policy.flightDateTime)}
-                        </p>
-                      </div>
-                      <div className="space-y-1">
-                        <p className="text-sm text-muted-foreground">
-                          Coverage Amount
-                        </p>
-                        <p className="text-sm font-semibold">
-                          {policy.tokenAmount} {policy.tokenAsset}
-                        </p>
-                      </div>
-                      <div className="space-y-1">
-                        <p className="text-sm text-muted-foreground">
-                          Claim Status
-                        </p>
-                        <p className="text-sm">
-                          {policy.isClaimed ? (
-                            <span className="text-green-400">✓ Claimed</span>
-                          ) : (
-                            <span className="text-muted-foreground">
-                              Not Claimed
-                            </span>
-                          )}
-                        </p>
+                <div key={policy.id} className="relative glass-box mt-4">
+                  <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+                    <div>
+                      <div className="flex items-start justify-between">
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <Icon icon="mdi:airplane" width="32" height="32" />
+                            {policy.flightNumber}
+                          </div>
+                          <div>{policy.description}</div>
+                        </div>
+                        <Badge className={getStatusColor(policy.status)}>
+                          {policy.status}
+                        </Badge>
                       </div>
                     </div>
-                    <div className="flex gap-3">
-                      <Link href={`/policies/${policy.id}`}>
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        <span>View Details</span>
-                      </Link>
-                      <Button
-                        size="sm"
-                        disabled={
-                          policy.isClaimed || policy.status === "Expired"
-                        }
-                        className="cursor-pointer bg-gradient-to-r from-yellow-400 to-amber-400 text-gray-900 font-medium px-4 py-2 rounded-full shadow-lg shadow-yellow-500/25"
-                      >
-                        Claim
-                      </Button>
+                    <div>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                        <div className="space-y-1">
+                          <p className="text-[16px] text-gray-400">Policy ID</p>
+                          <p className="font-mono text-[16px]">{policy.id}</p>
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-[16px] text-gray-400">
+                            Flight Date
+                          </p>
+                          <p className="text-sm flex items-center gap-1">
+                            <Icon icon="mdi:clock" width="24" height="24" />
+                            {formatDate(policy.flightDateTime)}
+                          </p>
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-[16px] text-gray-400">
+                            Coverage Amount
+                          </p>
+                          <p className="text-sm font-semibold">
+                            {policy.tokenAmount} {policy.tokenAsset}
+                          </p>
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-[16px] text-gray-400">
+                            Claim Status
+                          </p>
+                          <p className="text-sm">
+                            {policy.isClaimed ? (
+                              <span className="text-green-400">✓ Claimed</span>
+                            ) : (
+                              <span className="text-[16px] text-gray-400">
+                                Not Claimed
+                              </span>
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex gap-3">
+                        <Link href={`/policies/${policy.id}`}>
+                          <Icon
+                            icon="mdi:external-link"
+                            width="16"
+                            height="16"
+                          />
+                          <span>View Details</span>
+                        </Link>
+                        <Button
+                          size="sm"
+                          disabled={
+                            policy.isClaimed || policy.status === "Expired"
+                          }
+                          className="cursor-pointer bg-gradient-to-r from-yellow-400 to-amber-400 text-gray-900 font-medium px-4 py-2 rounded-full shadow-lg shadow-yellow-500/25"
+                        >
+                          Claim
+                        </Button>
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               ))}
             </div>
           </TabsContent>
 
           <TabsContent value="history">
-            <Card className="border-none bg-white rounded-xl">
-              <CardContent className="py-8">
+            <div className="border-none bg-white rounded-xl">
+              <div className="py-8">
                 <div className="text-center text-muted-foreground">
-                  <Clock className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                  <Icon icon="mdi:clock" width="24" height="24" />
                   <h3 className="text-lg font-semibold mb-2">
                     History Coming Soon
                   </h3>
@@ -365,77 +342,82 @@ export default function PoliciesPage() {
                     future update.
                   </p>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </TabsContent>
         </Tabs>
 
         {/* Smart Contracts Section */}
-        <Card className="border-none bg-white rounded-xl">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <ExternalLink className="h-5 w-5" />
-              Smart Contracts
-            </CardTitle>
-            <CardDescription>
-              View our deployed contracts on Stellar testnet
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-3 gap-4">
-              {smartContracts.map((contract) => (
-                <div
-                  key={contract.name}
-                  className="p-4 rounded-lg border border-border bg-muted/30"
-                >
-                  <h4 className="font-semibold mb-2">{contract.name}</h4>
-                  <p className="text-xs text-muted-foreground font-mono mb-3 break-all">
-                    {contract.address}
-                  </p>
-                  <Button
-                    size="sm"
-                    asChild
-                    className="w-full bg-gradient-to-r from-yellow-400 to-amber-400 text-gray-900 font-medium px-4 py-2 rounded-full shadow-lg shadow-yellow-500/25"
-                  >
-                    <a
-                      href={contract.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <ExternalLink className="h-3 w-3 mr-2" />
-                      View on Explorer
-                    </a>
-                  </Button>
-                </div>
-              ))}
+        <div className="relative glass-box mt-4">
+          <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+            <div>
+              <div className="flex items-center gap-2">
+                <Icon icon="mdi:external-link" width="24" height="24" />
+                Smart Contracts
+              </div>
+              <div>View deployed contracts on Stellar testnet</div>
             </div>
-          </CardContent>
-        </Card>
+            <div>
+              <div className="grid md:grid-cols-3 gap-4">
+                {smartContracts.map((contract) => (
+                  <div
+                    key={contract.name}
+                    className="p-4 rounded-lg bg-white/5"
+                  >
+                    <h4 className="font-semibold mb-2">{contract.name}</h4>
+                    <p className="text-xs text-gray-300 font-mono mb-3 break-all">
+                      {contract.address}
+                    </p>
+                    <Button
+                      size="sm"
+                      asChild
+                      className="w-full bg-gradient-to-r from-yellow-400 to-amber-400 text-gray-900 font-medium px-4 py-2 rounded-full shadow-lg shadow-yellow-500/25"
+                    >
+                      <a
+                        href={contract.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Icon icon="mdi:external-link" width="24" height="24" />
+                        View on Explorer
+                      </a>
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Alerts Section */}
-        <Card className="border-none bg-white rounded-xl">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5" />
-              Alerts
-            </CardTitle>
-            <CardDescription>
-              Stay informed about your policies and system events
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-center py-8 text-muted-foreground">
-              <AlertTriangle className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <h3 className="text-2xl font-semibold mb-2">
-                Alerts Coming Soon
-              </h3>
-              <p>
-                Subscribe to important system alerts about your policies and
-                events.
-              </p>
+        <div className="relative glass-box mt-4">
+          <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+            <div>
+              <div className="flex items-center gap-2">
+                <Icon icon="mdi:alert" width="24" height="24" />
+                Alerts
+              </div>
+              <div>Stay informed about your policies and system events</div>
             </div>
-          </CardContent>
-        </Card>
+            <div>
+              <div className="text-center py-8 text-muted-foreground">
+                <Icon
+                  icon="mdi:alert"
+                  width="64"
+                  height="64"
+                  className="mx-auto"
+                />
+                <h3 className="text-2xl font-semibold mb-2">
+                  Alerts Coming Soon
+                </h3>
+                <p>
+                  Subscribe to important system alerts about your policies and
+                  events.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

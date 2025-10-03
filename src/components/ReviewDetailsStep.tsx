@@ -25,7 +25,7 @@ export default function ReviewDetailsStep({
         <p>Verify your flight and insurance information</p>
       </div>
 
-      <div className="p-6 shadow-lg border-none rounded-xl">
+      <div className="p-6 shadow-lg border-none rounded-xl bg-white/3">
         <div className="flex items-center gap-4 mb-6">
           <Icon icon="mdi:airplane" width="24" height="24" />
           <div>

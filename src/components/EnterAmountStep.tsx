@@ -115,7 +115,7 @@ export default function EnterAmountStep({
               </div>
               <div className="flex justify-between text-[16px]">
                 <span className="text-gray-300">Potential Payout:</span>
-                <span className="font-medium text-green-600">
+                <span className="font-medium text-[#00ff26]">
                   {(amount * 3).toFixed(2)} USDC
                 </span>
               </div>
