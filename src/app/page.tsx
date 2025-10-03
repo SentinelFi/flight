@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import NetworkSwitcher from "@/components/NetworkSwitcher";
-import { useStellarWallet } from "@/contexts/StellarWalletContext";
+import {
+  useStellarWallet,
+  WalletNetwork,
+} from "@/contexts/StellarWalletContext";
 import { useWalletBalance } from "@/hooks/useWalletBalance";
 // import { getByVertical } from "@/lib/contracts/registry";
 // import { getPoliciesOwnedBy } from "@/lib/contracts/controller";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Dialog,
   DialogContent,
@@ -20,8 +21,8 @@ import lottie, { AnimationItem } from "lottie-web";
 import { Icon } from "@iconify/react";
 
 export default function Home() {
-  const [isHovering, setIsHovering] = useState(false);
-  const { isConnected, address, walletId } = useStellarWallet();
+  const { isConnected, address, switchNetwork, currentNetwork } =
+    useStellarWallet();
   const { balance, isLoading } = useWalletBalance();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,8 +32,16 @@ export default function Home() {
   const [isNetworkDropdownOpen, setIsNetworkDropdownOpen] = useState(false);
 
   const handleSelect = (value: string) => {
+    console.log("Selected Network", value);
     setSelectedNetwork(value);
     setIsNetworkDropdownOpen(false);
+    if (value === "Testnet") {
+      switchNetwork(WalletNetwork.TESTNET);
+      console.log("Testnet");
+    } else if (value === "Public") {
+      switchNetwork(WalletNetwork.PUBLIC);
+      console.log("Public");
+    }
   };
 
   const handleSubscribe = async () => {
@@ -72,6 +81,10 @@ export default function Home() {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    switchNetwork(WalletNetwork.TESTNET);
+  }, []);
 
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -156,41 +169,53 @@ export default function Home() {
 
           <div className="flex flex-col">
             <div className="relative mt-8 md:md-24 xl:mt-40 self-end">
-              <div className="w-[113px] h-[34px]">
-                <button
-                  onClick={() =>
-                    setIsNetworkDropdownOpen(!isNetworkDropdownOpen)
-                  }
-                  className="w-full h-full rounded-[4px] px-[10px] py-[5px] flex justify-between items-center
-                   bg-[rgba(125,0,255,1)] border border-[rgba(255,255,255,0.2)] text-white cursor-pointer"
-                >
-                  {selectedNetwork}
-                  <Icon
-                    icon={
-                      isNetworkDropdownOpen
-                        ? "mdi:chevron-up"
-                        : "mdi:chevron-down"
-                    }
-                    width="24"
-                    height="24"
-                  />
-                </button>
-                {isNetworkDropdownOpen && (
-                  <div className="absolute top-full left-0 w-full mt-1 bg-[rgba(125,0,255,1)] border border-[rgba(255,255,255,0.2)] rounded-[4px] text-white text-sm z-10">
-                    <div
-                      className="px-3 py-1 cursor-pointer hover:bg-purple-700"
-                      onClick={() => handleSelect("Testnet")}
-                    >
-                      Testnet
-                    </div>
-                    <div
-                      className="px-3 py-1 cursor-pointer hover:bg-purple-700"
-                      onClick={() => handleSelect("Public")}
-                    >
-                      Public
-                    </div>
-                  </div>
+              <div className="flex">
+                {isConnected && (
+                  <p className="bg-[#00FF26] text-[#0C0B17] rounded-[100px] p-[4px] font-semibold text-[16px] mx-auto my-auto text-center mr-2">
+                    {isLoading
+                      ? "Loading..."
+                      : balance
+                      ? `${parseFloat(balance).toFixed(1)} XLM`
+                      : "0.0 XLM"}
+                  </p>
                 )}
+                <div className="w-[113px] h-[34px]">
+                  <button
+                    onClick={() =>
+                      setIsNetworkDropdownOpen(!isNetworkDropdownOpen)
+                    }
+                    disabled={isLoading}
+                    className="w-full h-full rounded-[100px] px-[10px] py-[5px] flex justify-between items-center
+                   bg-[rgba(125,0,255,1)] border border-[rgba(255,255,255,0.2)] text-white font-semibold cursor-pointer"
+                  >
+                    {selectedNetwork}
+                    <Icon
+                      icon={
+                        isNetworkDropdownOpen
+                          ? "mdi:chevron-up"
+                          : "mdi:chevron-down"
+                      }
+                      width="24"
+                      height="24"
+                    />
+                  </button>
+                  {isNetworkDropdownOpen && (
+                    <div className="absolute top-full left-0 w-full mt-1 bg-[rgba(125,0,255,1)] border border-[rgba(255,255,255,0.2)] rounded-[4px] text-white text-sm z-10">
+                      <div
+                        className="px-3 py-1 cursor-pointer hover:bg-purple-700 font-semibold"
+                        onClick={() => handleSelect("Testnet")}
+                      >
+                        Testnet
+                      </div>
+                      <div
+                        className="px-3 py-1 cursor-pointer hover:bg-purple-700 font-semibold"
+                        onClick={() => handleSelect("Public")}
+                      >
+                        Public
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -331,59 +356,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      {/* <div className="hero-section">
-        <div>
-          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 to-amber-400 text-gray-900 font-medium px-4 py-2 rounded-full shadow-lg shadow-yellow-500/25">
-            <span className="text-sm uppercase tracking-wide">
-              <NetworkSwitcher />
-            </span>
-            {isConnected && (
-              <p>
-                {isLoading
-                  ? "Loading..."
-                  : balance
-                  ? `${parseFloat(balance).toFixed(1)} XLM`
-                  : "0.0 XLM"}
-              </p>
-            )}
-          </div>
-          <div className="card-container">
-            <div
-              className="white-card"
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-              style={{
-                transform: isHovering ? "translateY(-5px)" : "translateY(0)",
-              }}
-            >
-              <div className="card-header">
-                <h2>Get Coverage Today</h2>
-                <p>
-                  Protect your journey with automated, blockchain-powered flight
-                  insurance
-                </p>
-              </div>
-
-              <div className="input-group">
-                <label htmlFor="flight">Flight Number</label>
-                <input type="text" id="flight" placeholder="e.g., AA1234" />
-              </div>
-
-              <div className="input-group">
-                <label htmlFor="date">Travel Date</label>
-                <input type="date" id="date" />
-              </div>
-
-              <div className="input-group">
-                <label htmlFor="coverage">Premium Amount</label>
-                <input type="text" id="coverage" placeholder="e.g. $500" />
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div> */}
 
       <Dialog open={showThanks} onOpenChange={setShowThanks}>
         <DialogContent className="sm:max-w-md bg-[#7d00ff] text-white border-none">

@@ -10,8 +10,8 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import Link from "next/link";
-// import { useStellarWallet } from "@/contexts/StellarWalletContext";
-// import WalletNotConnected from "@/components/WalletNotConnected";
+import { useStellarWallet } from "@/contexts/StellarWalletContext";
+import WalletNotConnected from "@/components/WalletNotConnected";
 import TestnetAlert from "@/components/TestnetAlert";
 import { Icon } from "@iconify/react";
 
@@ -68,7 +68,7 @@ const smartContracts = [
 
 export default function PoliciesPage() {
   const [learnMoreOpen, setLearnMoreOpen] = useState(false);
-  // const { isConnected, address } = useStellarWallet();
+  const { isConnected, address } = useStellarWallet();
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -99,7 +99,7 @@ export default function PoliciesPage() {
     0
   );
 
-  // if (!isConnected || !address) return <WalletNotConnected />;
+  if (!isConnected || !address) return <WalletNotConnected />;
 
   return (
     <div className="min-h-screen py-8 px-4 text-white mb-32">

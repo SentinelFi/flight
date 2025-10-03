@@ -157,10 +157,12 @@ export default function SelectFlightStep({
       {searchMethod === "flightId" ? (
         <div className="space-y-4">
           <div>
-            <Label htmlFor="flightId">Flight ID</Label>
+            <Label htmlFor="flightId" className="text-[16px]">
+              Flight ID
+            </Label>
             <div className="flex gap-2 mt-1">
               <Select value={flightId} onValueChange={setFlightId}>
-                <SelectTrigger className="flex-1 bg-transparent">
+                <SelectTrigger className="flex-1 bg-transparent text-[16px]">
                   <SelectValue placeholder="Select or type flight ID" />
                 </SelectTrigger>
                 <SelectContent className="bg-black text-white">
