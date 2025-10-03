@@ -152,7 +152,7 @@ export default function Home() {
           <h1 className="font-normal text-[96px] leading-[94px] tracking-[0] text-center max-w-[750px]">
             Decentralized flight delay insurance
           </h1>
-          <p className="font-normal text-2xl text-center max-w-[750px]">
+          <p className="font-normal text-2xl text-center max-w-[750px] mt-8">
             Smart contract-based parametric insurance with instant payouts.
             Powered by Stellar blockchain.
           </p>
@@ -262,7 +262,10 @@ export default function Home() {
               </div>
 
               <div className="flex justify-center mt-12">
-                <button className="bg-[#00FF26] text-[#0C0B17] rounded-[100px] p-[10px] w-[200px] font-bold text-[24px] my-auto hover:cursor-pointer">
+                <button
+                  className="bg-[#00FF26] text-[#0C0B17] rounded-[100px] p-[10px] w-[200px] font-bold text-[24px] my-auto hover:cursor-pointer"
+                  onClick={getCovered}
+                >
                   Get Covered
                 </button>
               </div>

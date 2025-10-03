@@ -11,7 +11,7 @@ const TestnetAlert = () => {
           <strong>Testnet Version:</strong> This is a testing environment.
           Mainnet launch coming soon. Expect bugs and issues - please{" "}
           <Link
-            href="https://github.com/SentinelFi"
+            href="https://github.com/SentinelFi/flight/issues"
             className="underline font-medium"
             target="_blank"
             rel="noopener noreferrer"

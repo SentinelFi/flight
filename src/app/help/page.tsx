@@ -1,13 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -15,16 +8,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Github,
-  FileText,
-  Code,
-  Mail,
-  ExternalLink,
-  Plane,
-  Users,
-} from "lucide-react";
 import TestnetAlert from "@/components/TestnetAlert";
+import { Icon } from "@iconify/react";
 
 const faqData = [
   {
@@ -49,7 +34,8 @@ const faqData = [
   },
   {
     question: "How are premiums calculated?",
-    answer: "Premiums are dynamically calculated based on formula...",
+    answer:
+      "Premiums are calculated dynamically based on configured trigger and other parameters.",
   },
   {
     question: "What happens if the oracle fails?",
@@ -98,203 +84,222 @@ export default function HelpPage() {
   };
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-white">
       {/* Hero Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-3xl sm:text-4xl font-bold text-balance mb-4">
-          Help Center
-        </h1>
-        <p className="text-md mt-4 text-muted-foreground text-balance">
-          Get immediate assistance with your flight delay insurance. Access
-          answers, report issues, and request new features through our
-          comprehensive support center.
-        </p>
-      </div>
 
-      <TestnetAlert />
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-[40px] font-bold mb-2 text-center max-w-[750px] mx-auto">
+            Help Center
+          </h1>
+          <p className="mt-4 text-[20px] text-center max-w-[750px] mx-auto">
+            Get assistance with your flight delay insurance. Access answers,
+            report issues, and request new features through our comprehensive
+            support center.
+          </p>
+        </div>
+
+        <TestnetAlert />
+      </div>
 
       {/* Quick Actions Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-        <Card className="shadow-lg border-none rounded-xl">
-          <CardHeader className="pb-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-[color:var(--insurance-blue-light)]">
-                <Github className="h-5 w-5 text-[color:var(--insurance-blue)]" />
-              </div>
-              <div>
-                <CardTitle className="text-lg">Report Issues</CardTitle>
-                <CardDescription>
-                  Bug reports & feature requests
-                </CardDescription>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
-              Found a bug or have an idea? Help us improve by reporting issues
-              on GitHub.
-            </p>
-            <Button
-              onClick={handleIssuesClick}
-              variant="outline"
-              size="sm"
-              className="w-full group-hover:bg-accent bg-transparent hover:cursor-pointer"
-            >
-              <ExternalLink className="h-4 w-4 mr-2" />
-              Open GitHub Issues
-            </Button>
-          </CardContent>
-        </Card>
-
-        <Card className="shadow-lg border-none rounded-xl">
-          <CardHeader className="pb-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-[color:var(--insurance-blue-light)]">
-                <FileText className="h-5 w-5 text-[color:var(--insurance-blue)]" />
-              </div>
-              <div>
-                <CardTitle className="text-lg">Documentation</CardTitle>
-                <CardDescription>API docs & integration guides</CardDescription>
+        <div className="relative glass-box mt-4">
+          <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+            <div className="pb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-[color:var(--insurance-blue-light)]">
+                  <Icon icon="mdi:github" width="24" height="24" />
+                </div>
+                <div>
+                  <div className="text-lg">Report Issues</div>
+                  <div>Reports & Requests</div>
+                </div>
               </div>
             </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
-              Comprehensive guides for developers and users to integrate with
-              our platform.
-            </p>
-            <Button
-              onClick={handleDocsClick}
-              variant="outline"
-              size="sm"
-              className="w-full group-hover:bg-accent bg-transparent hover:cursor-pointer"
-            >
-              <ExternalLink className="h-4 w-4 mr-2" />
-              View Documentation
-            </Button>
-          </CardContent>
-        </Card>
-
-        <Card className="shadow-lg border-none rounded-xl">
-          <CardHeader className="pb-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-[color:var(--insurance-blue-light)]">
-                <Mail className="h-5 w-5 text-[color:var(--insurance-blue)]" />
-              </div>
-              <div>
-                <CardTitle className="text-lg">Contact Support</CardTitle>
-                <CardDescription>Direct email support</CardDescription>
+            <div>
+              <p className="text-[16px] text-gray-300 mb-4">
+                Found a bug or have an idea? Help us improve by reporting issues
+                on GitHub.
+              </p>
+              <Button
+                onClick={handleIssuesClick}
+                variant="outline"
+                size="sm"
+                className="w-full group-hover:bg-accent bg-transparent hover:cursor-pointer"
+              >
+                <Icon icon="mdi:external-link" width="24" height="24" />
+                Open GitHub Issues
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className="relative glass-box mt-4">
+          <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+            <div className="pb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-[color:var(--insurance-blue-light)]">
+                  <Icon icon="mdi:file-text" width="24" height="24" />
+                </div>
+                <div>
+                  <div className="text-lg">Documentation</div>
+                  <div>Docs & Guides</div>
+                </div>
               </div>
             </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
-              Need personalized help? Reach out to our support team directly.
-            </p>
-            <Button
-              onClick={() =>
-                (window.location.href =
-                  "mailto:someone@example.com?subject=Hello&body=Test")
-              }
-              variant="outline"
-              size="sm"
-              className="w-full group-hover:bg-accent bg-transparent hover:cursor-pointer"
-            >
-              <Mail className="h-4 w-4 mr-2" />
-              Contact via Email
-            </Button>
-          </CardContent>
-        </Card>
+            <div>
+              <p className="text-[16px] text-gray-300 mb-4">
+                Comprehensive guides for developers and users to integrate with
+                our platform.
+              </p>
+              <Button
+                onClick={handleDocsClick}
+                variant="outline"
+                size="sm"
+                className="w-full group-hover:bg-accent bg-transparent hover:cursor-pointer"
+              >
+                <Icon icon="mdi:external-link" width="24" height="24" />
+                View Documentation
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className="relative glass-box mt-4">
+          <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+            <div className="pb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-[color:var(--insurance-blue-light)]">
+                  <Icon icon="mdi:email" width="24" height="24" />
+                </div>
+                <div>
+                  <div className="text-lg">Contact Support</div>
+                  <div>Direct email support</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p className="text-[16px] text-gray-300 mb-4">
+                Need personalized help? Reach out to our support team directly
+                with your inquiries.
+              </p>
+              <Button
+                onClick={() =>
+                  (window.location.href =
+                    "mailto:someone@example.com?subject=Hello&body=Test")
+                }
+                variant="outline"
+                size="sm"
+                className="w-full group-hover:bg-accent bg-transparent hover:cursor-pointer"
+              >
+                <Icon icon="mdi:email" width="24" height="24" />
+                Contact via Email
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Smart Contracts Section */}
-      <Card className="mb-16 shadow-lg border-none rounded-xl">
-        <CardHeader>
-          <div className="flex items-center gap-3">
-            <Code className="h-6 w-6" />
-            <div>
-              <CardTitle className="text-2xl">Smart Contracts</CardTitle>
-              <CardDescription>
-                Explore our decentralized infrastructure
-              </CardDescription>
-            </div>
+      <div className="mb-16 shadow-lg border-none rounded-xl">
+        <div className="flex items-center gap-3 mb-6">
+          <Icon icon="mdi:code" width="24" height="24" />
+          <div>
+            <div className="text-2xl">Smart Contracts</div>
+            <div>Explore our decentralized infrastructure</div>
           </div>
-        </CardHeader>
-        <CardContent>
+        </div>
+        <div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 rounded-lg border border-border">
-              <h4 className="font-semibold mb-2 flex items-center gap-2">
-                Controller Contract
-              </h4>
-              <p className="text-sm text-muted-foreground mb-3">
-                Main policy management and payout logic
-              </p>
-              <Button
-                onClick={() => handleContractClick(CONTROLLER_CONTRACT)}
-                variant="ghost"
-                size="sm"
-                className="p-2 h-auto hover:cursor-pointer"
-              >
-                <ExternalLink className="h-3 w-3 mr-1" />
-                View
-              </Button>
+            <div className="relative glass-box mt-4">
+              <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+                <h4 className="font-semibold mb-2 flex items-center gap-2">
+                  Controller Contract
+                </h4>
+                <p className="text-[16px] text-gray-300 mb-3">
+                  Main policy management and payout logic
+                </p>
+                <Button
+                  onClick={() => handleContractClick(CONTROLLER_CONTRACT)}
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 h-auto hover:cursor-pointer"
+                >
+                  <Icon
+                    icon="mdi:external-link"
+                    width="24"
+                    height="24"
+                    className="mr-1"
+                  />
+                  View
+                </Button>
+              </div>
             </div>
 
-            <div className="p-4 rounded-lg border border-border">
-              <h4 className="font-semibold mb-2 flex items-center gap-2">
-                Oracle Contract
-              </h4>
-              <p className="text-sm text-muted-foreground mb-3">
-                Flight data verification and delay detection
-              </p>
-              <Button
-                onClick={() => handleContractClick(ORACLE_CONTRACT)}
-                variant="ghost"
-                size="sm"
-                className="p-2 h-auto hover:cursor-pointer"
-              >
-                <ExternalLink className="h-3 w-3 mr-1" />
-                View
-              </Button>
+            <div className="relative glass-box mt-4">
+              <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+                <h4 className="font-semibold mb-2 flex items-center gap-2">
+                  Oracle Contract
+                </h4>
+                <p className="text-[16px] text-gray-300 mb-3">
+                  Flight data verification and delay detection
+                </p>
+                <Button
+                  onClick={() => handleContractClick(ORACLE_CONTRACT)}
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 h-auto hover:cursor-pointer"
+                >
+                  <Icon
+                    icon="mdi:external-link"
+                    width="24"
+                    height="24"
+                    className="mr-1"
+                  />
+                  View
+                </Button>
+              </div>
             </div>
 
-            <div className="p-4 rounded-lg border border-border">
-              <h4 className="font-semibold mb-2 flex items-center gap-2">
-                Premiums Pool
-              </h4>
-              <p className="text-sm text-muted-foreground mb-3">
-                Liquidity pool for premium collection and payouts
-              </p>
-              <Button
-                onClick={() => handleContractClick(POOL_CONTRACT)}
-                variant="ghost"
-                size="sm"
-                className="p-2 h-auto hover:cursor-pointer"
-              >
-                <ExternalLink className="h-3 w-3 mr-1" />
-                View
-              </Button>
+            <div className="relative glass-box mt-4">
+              <div className="p-8 bg-[#0F0A28]/15 backdrop-blur-md rounded-[7px]">
+                <h4 className="font-semibold mb-2 flex items-center gap-2">
+                  Premiums Pool Contract
+                </h4>
+                <p className="text-[16px] text-gray-300 mb-3">
+                  Liquidity pool for premium collection and payouts
+                </p>
+                <Button
+                  onClick={() => handleContractClick(POOL_CONTRACT)}
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 h-auto hover:cursor-pointer"
+                >
+                  <Icon
+                    icon="mdi:external-link"
+                    width="24"
+                    height="24"
+                    className="mr-1"
+                  />
+                  View
+                </Button>
+              </div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* FAQ Section */}
-      <Card className="mb-16 shadow-lg border-none rounded-xl">
-        <CardHeader>
+      <div className="mb-16 shadow-lg border-none rounded-xl">
+        <div>
           <div className="flex items-center gap-3">
-            <Users className="h-6 w-6 text-[color:var(--insurance-blue)]" />
+            <Icon icon="mdi:users" width="24" height="24" />
             <div>
-              <CardTitle className="text-2xl">
-                Frequently Asked Questions
-              </CardTitle>
-              <CardDescription>
-                Common questions about parametric flight insurance
-              </CardDescription>
+              <div className="text-2xl">Frequently Asked Questions</div>
+              <div>Common questions about parametric flight insurance</div>
             </div>
           </div>
-        </CardHeader>
-        <CardContent>
+        </div>
+        <div>
           <Accordion
             type="single"
             collapsible
@@ -309,18 +314,23 @@ export default function HelpPage() {
               >
                 <AccordionTrigger className="text-left hover:no-underline hover:text-[color:var(--insurance-blue)] transition-colors">
                   <span className="flex items-start gap-3">
-                    <Plane className="h-4 w-4 mt-1 flex-shrink-0 text-[color:var(--insurance-blue)]" />
+                    <Icon
+                      icon="mdi:airplane"
+                      width="16"
+                      height="16"
+                      className="mt-1"
+                    />
                     {faq.question}
                   </span>
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed pl-7">
+                <AccordionContent className="text-[16px] text-gray-300 leading-relaxed pl-7">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </main>
   );
 }

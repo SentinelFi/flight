@@ -28,21 +28,24 @@ export default function FooterMain() {
             <div className="mt-5 flex items-center gap-4">
               <Link
                 aria-label="X (Twitter)"
-                href="https://x.com/"
+                href="https://x.com/sentinel_fi/"
+                target="_blank"
                 className="transition-opacity hover:opacity-80"
               >
                 <Icon icon="tabler:brand-x" width="32" height="32" />
               </Link>
               <Link
                 aria-label="Discord"
-                href="https://discord.com/"
+                href="https://discord.gg/CBhYMk786z"
+                target="_blank"
                 className="transition-opacity hover:opacity-80"
               >
                 <Icon icon="tabler:brand-discord" width="32" height="32" />
               </Link>
               <Link
                 aria-label="GitHub"
-                href="https://github.com/"
+                href="https://github.com/SentinelFi"
+                target="_blank"
                 className="transition-opacity hover:opacity-80"
               >
                 <Icon icon="tabler:brand-github" width="32" height="32" />
@@ -101,13 +104,18 @@ export default function FooterMain() {
                 <p className="font-semibold">Connect</p>
                 <ul className="mt-3 space-y-2">
                   <li>
-                    <Link href="https://x.com/" className="hover:text-white/50">
+                    <Link
+                      href="https://x.com/sentinel_fi/"
+                      target="_blank"
+                      className="hover:text-white/50"
+                    >
                       X (Twitter)
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="https://discord.com/"
+                      href="https://discord.gg/CBhYMk786z"
+                      target="_blank"
                       className="hover:text-white/50"
                     >
                       Discord
@@ -115,7 +123,8 @@ export default function FooterMain() {
                   </li>
                   <li>
                     <Link
-                      href="https://github.com/"
+                      href="https://github.com/SentinelFi"
+                      target="_blank"
                       className="hover:text-white/50"
                     >
                       GitHub

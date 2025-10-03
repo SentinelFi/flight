@@ -105,10 +105,10 @@ export default function PoliciesPage() {
     <div className="min-h-screen py-8 px-4 text-white">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-[40px] font-bold mb-2 text-[24px] text-center max-w-[750px]">
+          <h1 className="text-[40px] font-bold mb-2 text-center max-w-[750px] mx-auto">
             Insurance Policies
           </h1>
-          <p className="mt-4 text-[20px] text-center max-w-[750px]">
+          <p className="mt-4 text-[20px] text-center max-w-[750px] mx-auto">
             Your decentralized flight insurance policies at a glance
           </p>
         </div>
