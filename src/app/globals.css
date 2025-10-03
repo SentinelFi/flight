@@ -230,25 +230,6 @@ nav a:hover {
   border-color: #000;
 }
 
-.cta-button {
-  width: 100%;
-  padding: 1rem;
-  background: #000;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin-top: 2rem;
-}
-
-.cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
 .stats {
   display: flex;
   gap: 2rem;
