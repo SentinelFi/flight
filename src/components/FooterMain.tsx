@@ -159,6 +159,10 @@ export default function FooterMain() {
         <p className="mt-1">
           Decentralized Flight Delay Insurance — Powered by Stellar Blockchain.
         </p>
+        <p className="text-gray-300 text-[14px] mt-1">
+          This is independent software, not affiliated with, sponsored or
+          endorsed by the Stellar Development Foundation.
+        </p>
       </div>
     </footer>
   );
