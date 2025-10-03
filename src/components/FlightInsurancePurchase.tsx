@@ -103,7 +103,7 @@ export default function FlightInsurancePurchase() {
   };
 
   return (
-    <div className="min-h-screen py-8 px-4 text-white">
+    <div className="min-h-screen py-8 px-4 text-white mb-48">
       <div className="max-w-4xl mx-auto text-center">
         <div className="text-center mb-8 mx-auto">
           <h1 className="text-[40px] font-bold mb-2 text-[24px] text-center max-w-[750px] mx-auto">

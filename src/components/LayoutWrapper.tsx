@@ -16,8 +16,6 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
     <>
       <div className="container mx-auto">
         <div className="main-bg"></div>
-        {/* <div className="background-overlay"></div> */}
-
         <header className="relative mt-8 text-white flex flex-col gap-6 justify-between items-center md:flex-row md:gap-2">
           <Link href="/">
             <div className="logo-section">
@@ -36,7 +34,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
             </div>
           </Link>
 
-          <nav className="xl:mr-[10%] flex flex-row justify-between items-center rounded-[50px] py-[10px] px-[36px] gap-[36px] bg-white/10 h-[67px] font-normal text-[20px]">
+          <nav className="xl:mr-[10%] flex flex-row justify-between items-center rounded-[50px] py-[10px] px-[36px] gap-[20px] lg:gap-[36px] bg-white/10 h-[67px] font-normal text-[20px]">
             <Link href="/">About</Link>
             <Link href="/insure">Insure</Link>
             <Link href="/policies">Policies</Link>

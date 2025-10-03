@@ -149,7 +149,7 @@ export default function Home() {
           <h1 className="font-normal text-[48px] max-w-[400px] leading-[40px] sm:text-[72px] sm:max-w-[600px] sm:leading-[60px] md:text-[90px] md:max-w-[750px] md:leading-[94px] lg:text-[96px] xl:text-[96px] tracking-[0] text-center">
             Decentralized flight delay insurance
           </h1>
-          <p className="font-normal text-center text-lg max-w-[400px] xl:text-2xl xl:max-w-[750px] mt-8">
+          <p className="font-normal text-center text-[16px] max-w-[400px] sm:text-[24px] sm:max-w-[600px] xl:text-2xl xl:max-w-[750px] mt-8">
             Smart contract-based parametric insurance with instant payouts.
             Powered by Stellar blockchain.
           </p>
@@ -197,7 +197,7 @@ export default function Home() {
             <div className="relative glass-box mt-4">
               <div className="bg-[#0F0A28]/5 backdrop-blur-md rounded-[7px] text-left p-6 md:p-8">
                 <p className="font-semibold text-[24px]">Get Coverage Today</p>
-                <p className="font-normal text-md max-w-[450px] md:text-[24px] md:max-w-[750px]">
+                <p className="font-normal text-[16px] max-w-[350px] md:text-[24px] md:max-w-[600px] lg:max-w-[750px]">
                   Protect your journey with automated, blockchain-powered flight
                   insurance.
                 </p>
@@ -273,7 +273,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex justify-center items-center gap-[64px] mt-12">
+          <div className="flex justify-center items-center gap-[18px] sm:gap-[32px] md:gap-[64px] mt-12">
             <div className="stat w-[130px] h-[110px] rounded-[8px] p-[10px] bg-[rgba(223,184,255,0.2)] flex flex-col items-center justify-center">
               <div className="font-bold text-[48px] leading-none">24/7</div>
               <div className="font-medium text-[20px] leading-none mt-2">
@@ -295,10 +295,10 @@ export default function Home() {
           </div>
 
           <div className="mt-40 flex flex-col items-center space-y-4">
-            <p className="font-semibold text-[96px] leading-[94px] text-center">
+            <p className="font-semibold text-[42px] leading-[42px] sm:text-[88px] sm:leading-[88px] lg:text-[96px] lg:leading-[96px] text-center">
               Join Our Newsletter
             </p>
-            <p className="text-[24px] text-center max-w-[750px]">
+            <p className="text-center text-[20px] max-w-[400px] md:text-[24px] md:max-w-[750px]">
               Get the latest updates, insights, and news straight to your inbox
               and stay ahead of what is next.
             </p>
