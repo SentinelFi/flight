@@ -44,6 +44,7 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "@stellar/stellar-sdk": "^13.3.0",
     "@supabase/supabase-js": "^2.57.4",
+    "@vercel/analytics": "^1.6.1",
     "class-variance-authority": "^0.7.1",
     "embla-carousel-react": "^8.6.0",
     "input-otp": "^1.4.2",

@@ -6,6 +6,7 @@ import {
   WalletNetwork,
 } from "@/contexts/StellarWalletContext";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import { Analytics } from "@vercel/analytics/next";
 
 const fnt = Afacad();
 
@@ -29,6 +30,7 @@ export default function RootLayout({
         >
           <LayoutWrapper>{children}</LayoutWrapper>
         </StellarWalletProvider>
+        <Analytics />
       </body>
     </html>
   );
